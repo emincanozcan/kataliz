@@ -18,6 +18,7 @@ class PardusAppSeeder extends Seeder
             'name' => 'Spotify',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
             'scripts' => [
+                'sudo apt install curl -y',
                 'sudo curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -',
                 'sudo echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list',
                 'sudo apt-get update -y',
@@ -113,7 +114,7 @@ class PardusAppSeeder extends Seeder
             'name' => 'Zoom',
             'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
             'scripts' => [
-                'sudo wget -O ~/zoom_install.deb https://zoom.us/client/latest/zoom_amd64.deb',
+                'sudo wget https://zoom.us/client/latest/zoom_amd64.deb',
                 'sudo apt --fix-broken install ~/zoom_install.deb -y',
                 'sudo rm -f zoom_install.deb',
             ]
@@ -188,7 +189,7 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Kdenlive',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Kdenlive-logo.svg/1280px-Kdenlive-logo.svg.png",
-            'scripts' => ['sudo apt install thunderbird -y']
+            'scripts' => ['sudo add-apt-repository ppa:kdenlive/kdenlive-stable -y','sudo apt update -y','sudo apt install kdenlive -y']
         ]);
 
         PardusApp::create([
@@ -203,9 +204,7 @@ class PardusAppSeeder extends Seeder
             'name' => 'Python',
             'image_url' => "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/267_Python_logo-512.png",
             'scripts' => [
-                'sudo add-apt-repository ppa:deadsnakes/ppa -y',
-                'sudo apt-get update -y',
-                'sudo apt-get install python3.9 -y',
+                'sudo apt-get install python3 -y',
             ]
         ]);
 

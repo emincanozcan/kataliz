@@ -21,7 +21,7 @@
         <button
           class="bg-pardus-yellow px-2 py-1 font-medium rounded-lg shadow-lg text-gray-900"
           @click="addToBucket(pardusApp.id)"
-          v-if="!bucket.includes(pardusApp.id)"
+          v-if="!isInBucket(pardusApp.id)"
         >
           Sepete Ekle
         </button>
@@ -50,10 +50,10 @@ export default {
     },
   },
   setup() {
-    const { addToBucket, bucket } = store;
+    const { addToBucket, isInBucket } = store;
     return {
       addToBucket,
-      bucket,
+      isInBucket,
     };
   },
 };

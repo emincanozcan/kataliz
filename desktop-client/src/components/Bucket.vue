@@ -3,22 +3,21 @@
     <h2 class="mb-8 text-xl font-medium flex items-center justify-center">
       Uygulama Sepeti <span class="text-base ml-2">({{ apps.length }})</span>
     </h2>
-    <div class="relative">
-      <div class="flex-1">
-        <div class="relative mr-2" v-for="app in apps" :key="app.id">
-          <div class="flex items-center py-2 px-2 my-2 bg-gray-700 rounded-md">
-            <img class="h-8 w-8 mr-4" :src="app.image_url" />
-            <h4 class="font-bold text-sm text-gray-300">{{ app.name }}</h4>
-          </div>
-          <button
-            class="absolute px-1 py-1 transform top-1/2 -translate-y-1/2 bg-red-500 text-white -right-2 rounded-md"
-            @click="removeFromBucket(app.id)"
-          >
-            <IconCross class="w-2 h-2" />
-          </button>
+    <div class="flex-1">
+      <div class="relative mr-2" v-for="app in apps" :key="app.id">
+        <div class="flex items-center py-2 px-2 my-2 bg-gray-700 rounded-md">
+          <img class="h-8 w-8 mr-4" :src="app.image_url" />
+          <h4 class="font-bold text-sm text-gray-300">{{ app.name }}</h4>
         </div>
+        <button
+          class="absolute px-1 py-1 transform top-1/2 -translate-y-1/2 bg-red-500 text-white -right-2 rounded-md"
+          @click="removeFromBucket(app.id)"
+        >
+          <IconCross class="w-2 h-2" />
+        </button>
       </div>
     </div>
+    <button @click="exportToFile">Dışa Aktar</button>
   </div>
 </template>
 
@@ -26,6 +25,7 @@
 import IconCross from "../icons/icon-cross.svg";
 import store from "../global-state/store";
 import { computed } from "vue";
+import exportToFile from "../actions/exportToFile";
 export default {
   name: "Bucket",
   components: { IconCross },
@@ -40,6 +40,7 @@ export default {
       apps,
       bucket: store.bucket,
       removeFromBucket,
+      exportToFile: exportToFile.exportToFile,
     };
   },
 };

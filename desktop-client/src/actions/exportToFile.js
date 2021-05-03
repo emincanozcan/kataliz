@@ -1,11 +1,32 @@
 import store from "../global-state/store";
-function generateShellScriptContent() {
-  const items = store.pardusApps.filter((app) =>
-    store.bucket.value.includes(app.id)
-  );
-  console.log(items);
+
+function generateShellScriptFromBucket() {
+  let script = `#!bin/sh 
+sudo apt update -y
+sudo apt-get install software-properties-common -y
+`;
+  store.bucket.value.forEach((id) => {
+    const pardusApp = store.pardusApps.value.find((app) => app.id === id);
+    let base = [
+      "\n",
+      "# ------------",
+      `echo '${pardusApp.name} adlı program yüklenecek.'`,
+    ].join("\n");
+    script += [
+      base,
+      pardusApp.scripts.join("\n"),
+      'sudo find /etc/apt/sources.list.d/ -name "*.save" -type f -delete',
+    ].join("\n");
+  });
+
+  return script;
 }
-// function exportOnPardus() {}
+
+function exportToFile() {
+  window.ipcRenderer.send("exportBucket", generateShellScriptFromBucket());
+}
+
 export default {
-  generateShellScriptContent,
+  generateShellScriptFromBucket,
+  exportToFile,
 };

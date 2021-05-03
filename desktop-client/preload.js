@@ -1,3 +1,2 @@
-console.log("it works");
-import { ipcRenderer } from "electron";
-window.ipcRenderer = ipcRenderer;
+const electron = require("electron");
+window.ipcRenderer = electron.ipcRenderer;

@@ -30,8 +30,7 @@
       >
         <button
           class="absolute rounded-tl-lg right-0 bottom-0 px-2 py-2 text-gray-900 bg-pardus-yellow flex items-center"
-          :disabled="isPackageInBucket(pkg['pardus_apps'])"
-          v-if="!isPackageInBucket(pkg['pardus_apps'])"
+          v-if="!isInBucket(pkg['pardus_apps'])"
           @click="addToBucket(pkg['pardus_apps'])"
         >
           <IconPlus class="w-4 h-4" />
@@ -59,7 +58,7 @@
               <span>{{ app.name }}</span>
               <span
                 class="ml-1 flex items-center text-green-500"
-                v-if="isAppInBucket(app.id)"
+                v-if="isInBucket(app.id)"
               >
                 <IconCheck class="h-6 w-6" />
               </span>
@@ -105,18 +104,6 @@ export default {
       );
     }
 
-    function isAppInBucket(appId) {
-      return store.bucket.value.findIndex((item) => item === appId) !== -1;
-    }
-
-    function isPackageInBucket(pardusAppIds) {
-      let result = true;
-      pardusAppIds.forEach((appId) => {
-        result = result && isAppInBucket(appId);
-      });
-      return result;
-    }
-
     function addToBucket(pardusAppIds) {
       pardusAppIds.forEach((id) => store.addToBucket(id));
     }
@@ -124,8 +111,7 @@ export default {
     return {
       search,
       filteredAppPackages,
-      isPackageInBucket,
-      isAppInBucket,
+      isInBucket: store.isInBucket,
       getPardusAppsById,
       addToBucket,
     };
