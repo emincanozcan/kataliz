@@ -8,6 +8,11 @@ use Illuminate\Database\Seeder;
 
 class AppPackageSeeder extends Seeder
 {
+    private function addWithName()
+    {
+
+    }
+
     public function run()
     {
         $libreOffice = PardusApp::whereName('Libre Office')->firstOrFail();
@@ -20,9 +25,11 @@ class AppPackageSeeder extends Seeder
         $pip = PardusApp::whereName('PIP (Python Paket Yöneticisi)')->firstOrFail();
         $docker = PardusApp::whereName('Docker')->firstOrFail();
         $dockerCompose = PardusApp::whereName('Docker Compose')->firstOrFail();
-        $telegram = PardusApp::whereName('telegram')->firstOrFail();
+        $telegram = PardusApp::whereName('Telegram')->firstOrFail();
         $discord = PardusApp::whereName('Discord')->firstOrFail();
         $zoom = PardusApp::whereName('Zoom')->firstOrFail();
+        $git = PardusApp::whereName('Git')->firstOrFail();
+        $okular = PardusApp::whereName('Okular')->firstOrFail();
 
         AppPackage::create([
             "name" => "Docker Paketi",
@@ -42,11 +49,11 @@ class AppPackageSeeder extends Seeder
         AppPackage::create([
             "name" => "Ofis Paketi",
             "image_url" => "https://icons.iconarchive.com/icons/inipagi/job-seeker/512/front-office-icon.png",
-        ])->pardusApps()->attach([$gedit->id, $libreOffice->id, $thunderbird->id,]);
+        ])->pardusApps()->attach([$gedit->id, $libreOffice->id, $thunderbird->id, $okular->id]);
 
         AppPackage::create([
             "name" => "Python Geliştirici Paketi",
             "image_url" => "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png",
-        ])->pardusApps()->attach([$python->id, $pip->id, $vscode->id ]);
+        ])->pardusApps()->attach([$python->id, $pip->id, $vscode->id, $git->id]);
     }
 }

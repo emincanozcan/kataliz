@@ -26,7 +26,7 @@ class PardusAppSeeder extends Seeder
             ]
         ]);
         PardusApp::create([
-            'name' => 'Auda City',
+            'name' => 'Audacity',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/f/f6/Audacity_Logo.svg",
             'scripts' => ['sudo apt-get install audacity -y']
         ]);
@@ -53,7 +53,6 @@ class PardusAppSeeder extends Seeder
             ]
         ]);
 
-
         PardusApp::create([
             'name' => 'Okular',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/f/fc/Breezeicons-apps-48-okular.svg",
@@ -68,7 +67,16 @@ class PardusAppSeeder extends Seeder
                 "sudo apt-get install evince - y",
             ]
         ]);
-        PardusApp::create([
+
+        PardusApp::create ([
+            'name' => 'Git',
+            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg",
+            'scripts' => [
+                "sudo apt-get install git",
+            ]
+        ]);
+
+        PardusApp::create ([
             'name' => 'Git Cola',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/a/a6/Breezeicons-apps-48-git-cola.svg",
             'scripts' => [

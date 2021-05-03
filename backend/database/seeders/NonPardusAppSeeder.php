@@ -8,6 +8,15 @@ use Illuminate\Database\Seeder;
 
 class NonPardusAppSeeder extends Seeder
 {
+    private function haveSame($name)
+    {
+        $app = PardusApp::whereName($name)->firstOrFail();
+        NonPardusApp::create([
+            'name' => $app->name,
+            'image_url' => $app->image_url,
+        ])->pardusApps()->attach([$app->id]);
+    }
+
     /**
      * Run the database seeds.
      *
@@ -22,10 +31,13 @@ class NonPardusAppSeeder extends Seeder
         $thunderbird = PardusApp::whereName('Mozilla Thunderbird')->firstOrFail();
         $kdenlive = PardusApp::whereName('KdenLive')->firstOrFail();
         $openshot = PardusApp::whereName('OpenShot')->firstOrFail();
-        $vscode = PardusApp::whereName('Visual Studio Code (VS CODE)')->firstOrFail();
-        $telegram = PardusApp::whereName('telegram')->firstOrFail();
-        $discord = PardusApp::whereName('Discord')->firstOrFail();
-        $zoom = PardusApp::whereName('Zoom')->firstOrFail();
+        $gimp = PardusApp::whereName('Gimp')->firstOrFail();
+        $krita = PardusApp::whereName('Krita')->firstOrFail();
+        $evince = PardusApp::whereName('Evince')->firstOrFail();
+        $okular = PardusApp::whereName('Okular')->firstOrFail();
+        $gitCola = PardusApp::whereName('Git Cola')->firstOrFail();
+        $gitKraken = PardusApp::whereName('Git Kraken')->firstOrFail();
+        $qBitTorrent = PardusApp::whereName('QBittorrent')->firstOrFail();
 
         NonPardusApp::create([
             'name' => 'Microsoft Office',
@@ -68,21 +80,34 @@ class NonPardusAppSeeder extends Seeder
         ])->pardusApps()->attach([$kdenlive->id, $openshot->id]);
 
         NonPardusApp::create([
-            'name' => "Visual Studio Code (VS CODE)",
-            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
-        ])->pardusApps()->attach([$vscode->id]);
+            'name' => 'Adobe Photoshop',
+            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg",
+        ])->pardusApps()->attach([$gimp->id, $krita->id]);
 
         NonPardusApp::create([
-            'name' => "Telegram",
-            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg",
-        ])->pardusApps()->attach([$telegram->id]);
+            'name' => 'Adobe Reader',
+            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/0/0a/Adobe_Acrobat_DC_icon.svg",
+        ])->pardusApps()->attach([$evince->id, $okular->id]);
+
         NonPardusApp::create([
-            'name' => "Discord",
-            'image_url' => "https://discord.com/assets/f8389ca1a741a115313bede9ac02e2c0.svg",
-        ])->pardusApps()->attach([$discord->id]);
+            'name' => 'SourceTree',
+            'image_url' => "https://cdn.worldvectorlogo.com/logos/sourcetree-1.svg",
+        ])->pardusApps()->attach([$gitCola->id, $gitKraken->id]);
+
         NonPardusApp::create([
-            'name' => "Zoom",
-            'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
-        ])->pardusApps()->attach([$zoom->id]);
+            'name' => 'UTorrent',
+            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/6/61/%CE%9CTorrent_2.2_icon.svg",
+        ])->pardusApps()->attach([$qBitTorrent->id]);
+
+        $this->haveSame('Git');
+        $this->haveSame('Visual Studio Code (VS CODE)');
+        $this->haveSame('Discord');
+        $this->haveSame('Zoom');
+        $this->haveSame('Telegram');
+        $this->haveSame('Spotify');
+        $this->haveSame('Audacity');
+        $this->haveSame('Vlc Player');
+        $this->haveSame('Python');
+        $this->haveSame('PIP (Python Paket Yöneticisi)');
     }
 }
