@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\FetchAllDataController;
-use App\Http\Controllers\Api\FetchAppPackages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

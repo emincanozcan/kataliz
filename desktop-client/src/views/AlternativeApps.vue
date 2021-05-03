@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header
-      class="w-full h-20 sticky flex items-center top-0 left-0 bg-gray-900 space-x-16"
-    >
+    <Header class="space-x-16">
       <div class="flex items-center w-96 flex-shrink-0">
         <div class="relative w-full">
           <input
@@ -21,9 +19,9 @@
           Alternatifleri!
         </h4>
       </div>
-    </header>
+    </Header>
 
-    <div class="mt-8 min-w-full overflow-x-auto" style="width: max-content">
+    <div class="min-w-full overflow-x-auto" style="width: max-content">
       <div v-for="nonPardusApp in filteredNonPardusApps" :key="nonPardusApp.id">
         <alternative-app-suggestion-row
           :non-pardus-app="nonPardusApp"
@@ -41,10 +39,12 @@ import IconSearch from "../icons/icon-search.svg";
 import store from "../global-state/store";
 import AlternativeAppSuggestionRow from "../components/AlternativeAppSuggestionRow";
 import { ref } from "vue";
+import Header from "../components/Header";
 
 export default {
   name: "AlternativeApps",
   components: {
+    Header,
     AlternativeAppSuggestionRow,
     IconSearch,
   },

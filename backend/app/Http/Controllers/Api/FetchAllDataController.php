@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\AppPackage;
 use App\Models\NonPardusApp;
 use App\Models\PardusApp;
-use Illuminate\Http\Request;
 
 class FetchAllDataController extends Controller
 {

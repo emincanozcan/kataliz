@@ -9,7 +9,7 @@ const appPackages = ref([]);
 async function fetchData() {
   try {
     const response = await axios.get("http://localhost/api/get-all-data");
-    console.log("apiresponse", response);
+    await new Promise((resolve) => setTimeout(() => resolve(), 2000));
     const data = response.data.data;
     pardusApps.value = data["pardus_apps"];
     nonPardusApps.value = data["non_pardus_apps"];
@@ -18,7 +18,6 @@ async function fetchData() {
     console.error("API DATA FETCH ERROR", e);
   }
 }
-
 const bucket = ref([]);
 
 function addToBucket(pardusAppId) {

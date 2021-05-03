@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex items-center bg-gray-800 px-4 py-3 rounded-lg mb-4 space-x-16"
+    class="flex items-center pr-4 bg-gray-800 py-3 rounded-lg mb-4 space-x-16"
   >
     <!-- non pardus app -->
-    <div class="w-96">
+    <div class="w-96 pl-4">
       <div class="flex items-center space-x-4">
         <img class="w-10 h-10" :src="nonPardusApp.image_url" alt="" />
-        <span class="font-medium text-md">{{ nonPardusApp.name }}</span>
+        <span class="font-medium">{{ nonPardusApp.name }}</span>
       </div>
     </div>
     <!-- pardus app alternatives... -->
@@ -21,9 +21,11 @@
         <button
           class="bg-pardus-yellow px-2 py-1 font-medium rounded-lg shadow-lg text-gray-900"
           @click="addToBucket(pardusApp.id)"
+          v-if="!bucket.includes(pardusApp.id)"
         >
           Sepete Ekle
         </button>
+        <IconCheck v-else class="text-white w-6 h-6 bg-green-600 rounded-md" />
       </div>
     </div>
   </div>
@@ -31,8 +33,12 @@
 
 <script>
 import store from "../global-state/store";
+import IconCheck from "../icons/icon-check.svg";
 export default {
   name: "AlternativeAppSuggestionRow",
+  components: {
+    IconCheck,
+  },
   props: {
     nonPardusApp: {
       type: Object,
@@ -44,9 +50,10 @@ export default {
     },
   },
   setup() {
-    const { addToBucket } = store;
+    const { addToBucket, bucket } = store;
     return {
       addToBucket,
+      bucket,
     };
   },
 };

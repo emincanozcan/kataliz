@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header
-      class="w-full h-20 sticky flex items-center top-0 left-0 bg-gray-900 space-x-16"
-    >
+    <Header class="space-x-16">
       <div class="flex items-center w-96 flex-shrink-0">
         <div class="relative w-full">
           <input
@@ -21,7 +19,7 @@
           Başlangıç!
         </h4>
       </div>
-    </header>
+    </Header>
     <div
       class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-6 2xl:gap-8"
     >
@@ -45,7 +43,6 @@
         >
           <IconCheck class="h-12 w-12 text-white" />
         </span>
-
         <div>
           <img class="w-full object-contain h-24" :src="pkg.image_url" />
           <h3 class="font-medium text-gray-200 mx-4 text-xl mt-4">
@@ -80,9 +77,12 @@ import IconCheck from "../icons/icon-check.svg";
 import IconPlus from "../icons/icon-plus.svg";
 import store from "../global-state/store";
 import { ref } from "vue";
+import Header from "../components/Header";
+
 export default {
   name: "AlternativeApps",
   components: {
+    Header,
     IconSearch,
     IconCheck,
     IconPlus,
