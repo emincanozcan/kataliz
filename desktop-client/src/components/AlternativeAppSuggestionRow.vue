@@ -20,6 +20,7 @@
         <span class="font-medium mr-4"> {{ pardusApp.name }}</span>
         <button
           class="bg-pardus-yellow px-2 py-1 font-medium rounded-lg shadow-lg text-gray-900"
+          @click="addToBucket(pardusApp.id)"
         >
           Sepete Ekle
         </button>
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import store from "../global-state/store";
 export default {
   name: "AlternativeAppSuggestionRow",
   props: {
@@ -42,7 +44,10 @@ export default {
     },
   },
   setup() {
-    return {};
+    const { addToBucket } = store;
+    return {
+      addToBucket,
+    };
   },
 };
 </script>

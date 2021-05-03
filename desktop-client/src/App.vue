@@ -2,7 +2,7 @@
   <div v-if="loading">Loading</div>
   <div v-else class="bg-gray-900 text-gray-100 min-h-screen flex">
     <Sidebar
-      class="sticky top-0 left-0 h-screen w-64 bg-gray-700 bg-opacity-25 flex-shrink-0"
+      class="sticky top-0 left-0 h-screen w-96 bg-gray-700 bg-opacity-25 flex-shrink-0"
     />
     <router-view class="flex-1 bg-gray-900" />
   </div>

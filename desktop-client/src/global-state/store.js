@@ -19,10 +19,26 @@ async function fetchData() {
   }
 }
 
+const bucket = ref([]);
+
+function addToBucket(pardusAppId) {
+  if (bucket.value.find((item) => item === pardusAppId)) {
+    return;
+  }
+  bucket.value.push(pardusAppId);
+}
+
+function removeFromBucket(pardusAppId) {
+  bucket.value = bucket.value.filter((item) => item !== pardusAppId);
+}
+
 export default {
   loading,
   pardusApps,
   nonPardusApps,
   appPackages,
   fetchData,
+  bucket,
+  addToBucket,
+  removeFromBucket,
 };
