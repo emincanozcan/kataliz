@@ -9,6 +9,7 @@
             class="w-full h-12 pl-4 pr-16 font-medium text-sm text-gray-300 bg-gray-800 rounded-lg overflow-hidden transition-all outline-none border-2 border-gray-800 hover:border-pardus-yellow focus:border-pardus-yellow"
             type="text"
             placeholder="Alıştığınız Uygulama"
+            @input="search"
           />
           <IconSearch class="w-6 h-6 text-gray-300 absolute right-3 top-3" />
         </div>
@@ -23,36 +24,13 @@
     </header>
 
     <div class="mt-8 min-w-full overflow-x-auto" style="width: max-content">
-      <div v-for="nonPardusApp in nonPardusApps" :key="nonPardusApp.id">
-        <div
-          class="flex items-center bg-gray-800 px-4 py-3 rounded-lg mb-4 space-x-16"
-        >
-          <!-- non pardus app -->
-          <div class="w-96">
-            <div class="flex items-center space-x-4">
-              <img class="w-10 h-10" :src="nonPardusApp.image_url" alt="" />
-              <span class="font-medium text-md">{{ nonPardusApp.name }}</span>
-            </div>
-          </div>
-          <!-- pardus app alternatives... -->
-          <div class="flex space-x-12">
-            <div
-              class="flex items-center"
-              :key="pardusApp.id"
-              v-for="pardusApp in getAlternativeAppsOfNonPardusAppById(
-                nonPardusApp.id
-              )"
-            >
-              <img class="w-10 h-10 mr-2" :src="pardusApp.image_url" alt="" />
-              <span class="font-medium mr-4"> {{ pardusApp.name }}</span>
-              <button
-                class="bg-pardus-yellow px-2 py-1 font-medium rounded-lg shadow-lg text-gray-900"
-              >
-                Sepete Ekle
-              </button>
-            </div>
-          </div>
-        </div>
+      <div v-for="nonPardusApp in filteredNonPardusApps" :key="nonPardusApp.id">
+        <alternative-app-suggestion-row
+          :non-pardus-app="nonPardusApp"
+          :pardus-alternatives="
+            getAlternativeAppsOfNonPardusAppById(nonPardusApp.id)
+          "
+        />
       </div>
     </div>
   </div>
@@ -61,10 +39,13 @@
 <script>
 import IconSearch from "../icons/icon-search.svg";
 import store from "../global-state/store";
+import AlternativeAppSuggestionRow from "../components/AlternativeAppSuggestionRow";
+import { ref } from "vue";
 
 export default {
   name: "AlternativeApps",
   components: {
+    AlternativeAppSuggestionRow,
     IconSearch,
   },
   setup() {
@@ -84,7 +65,22 @@ export default {
       return ret;
     }
 
-    return { nonPardusApps, getAlternativeAppsOfNonPardusAppById };
+    let filteredNonPardusApps = ref([]);
+    filteredNonPardusApps.value = nonPardusApps.value;
+
+    function search(event) {
+      const searchString = event.target.value;
+      filteredNonPardusApps.value = nonPardusApps.value.filter((nonPardusApp) =>
+        nonPardusApp.name.toLowerCase().includes(searchString.toLowerCase())
+      );
+    }
+
+    return {
+      nonPardusApps,
+      getAlternativeAppsOfNonPardusAppById,
+      search,
+      filteredNonPardusApps,
+    };
   },
 };
 </script>
