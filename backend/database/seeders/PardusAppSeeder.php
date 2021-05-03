@@ -72,7 +72,7 @@ class PardusAppSeeder extends Seeder
             'name' => 'Git',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg",
             'scripts' => [
-                "sudo apt-get install git",
+                "sudo apt-get install git -y",
             ]
         ]);
 
@@ -123,8 +123,8 @@ class PardusAppSeeder extends Seeder
             'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
             'scripts' => [
                 'sudo wget https://zoom.us/client/latest/zoom_amd64.deb',
-                'sudo apt --fix-broken install ~/zoom_install.deb -y',
-                'sudo rm -f zoom_install.deb',
+                'sudo apt --fix-broken install ~/zoom_amd64.deb -y',
+                'sudo rm -f zoom_amd64.deb',
             ]
         ]);
 
