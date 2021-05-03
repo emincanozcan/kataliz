@@ -1,6 +1,7 @@
 {
   "name": "desktop-client",
   "version": "0.1.0",
+  "author": "Emincan Ozcan <emincan@emincanozcan.com>",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

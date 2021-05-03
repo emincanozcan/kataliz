@@ -1,4 +1,14 @@
 module.exports = {
+  pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        linux: {
+          publish: ["github"],
+          target: ["AppImage", "deb"],
+        },
+      },
+    },
+  },
   chainWebpack: (config) => {
     const svgRule = config.module.rule("svg");
     svgRule.uses.clear();
