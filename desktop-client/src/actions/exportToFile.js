@@ -1,7 +1,7 @@
 import store from "../global-state/store";
 
 function generateShellScriptFromBucket() {
-  let script = `#!bin/sh 
+  let script = `#!/bin/sh 
 sudo apt update -y
 sudo apt-get install software-properties-common -y
 `;
