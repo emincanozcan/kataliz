@@ -114,7 +114,7 @@ class PardusAppSeeder extends Seeder
             'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
             'scripts' => [
                 'sudo wget -O ~/zoom_install.deb https://zoom.us/client/latest/zoom_amd64.deb',
-                'sudo apt --fix-broken install ~/zoom_amd64.deb -y',
+                'sudo apt --fix-broken install ~/zoom_install.deb -y',
                 'sudo rm -f zoom_install.deb',
             ]
         ]);
