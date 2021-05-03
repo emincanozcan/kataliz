@@ -4,7 +4,7 @@
     <Sidebar
       class="sticky top-0 left-0 h-screen w-96 bg-gray-700 bg-opacity-25 flex-shrink-0"
     />
-    <router-view class="flex-1 bg-gray-900" />
+    <router-view class="flex-1 bg-gray-900 mx-6" />
   </div>
 </template>
 <script>
