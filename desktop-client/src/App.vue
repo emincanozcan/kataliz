@@ -1,6 +1,12 @@
 <template>
   <div
-    v-if="loading"
+    v-if="installationOpen"
+    class="bg-gray-900 h-screen flex items-center justify-center"
+  >
+    <Installation @close="onInstallationEnd" />
+  </div>
+  <div
+    v-else-if="loading"
     class="bg-gray-900 h-screen flex items-center justify-center"
   >
     <Loading loading-message="Uygulama Listesi Yükleniyor" />
@@ -16,13 +22,24 @@
 import Sidebar from "./components/Sidebar";
 import store from "./global-state/store";
 import Loading from "./components/Loader";
+import { ref } from "vue";
+import Installation from "./views/Installation";
 export default {
-  components: { Loading, Sidebar },
+  components: { Installation, Loading, Sidebar },
   setup() {
     store.fetchData().then(() => {
       store.loading.value = false;
     });
-    return { loading: store.loading };
+
+    const installationOpen = ref(false);
+    window.ipcRenderer.on("installation-start", () => {
+      installationOpen.value = true;
+    });
+    function onInstallationEnd() {
+      installationOpen.value = false;
+    }
+
+    return { loading: store.loading, installationOpen, onInstallationEnd };
   },
 };
 </script>

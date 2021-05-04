@@ -39,7 +39,7 @@ class PardusAppSeeder extends Seeder
             'name' => 'Gimp',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/4/45/The_GIMP_icon_-_gnome.svg",
             'scripts' => [
-                "sudo add-apt-repository ppa:otto-kesselgulasch/gimp -y", "sudo apt-get update -y", "sudo apt-get install gimp -y",
+                "sudo apt-get install gimp -y",
             ]
         ]);
 

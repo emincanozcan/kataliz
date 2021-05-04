@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 import AlternativeApps from "../views/AlternativeApps";
 import AppPackages from "../views/AppPackages";
 
@@ -16,7 +20,9 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: process.env.IS_ELECTRON
+    ? createWebHashHistory()
+    : createWebHistory(),
   routes,
 });
 

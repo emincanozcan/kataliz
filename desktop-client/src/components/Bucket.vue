@@ -19,6 +19,12 @@
     </div>
     <button
       class="bg-pardus-yellow px-4 py-2 text-sm text-gray-900 font-medium rounded-md shadow-md w-full mt-4"
+      @click="install"
+    >
+      Kurulumu Gerçekleştir
+    </button>
+    <button
+      class="bg-pardus-yellow px-4 py-2 text-sm text-gray-900 font-medium rounded-md shadow-md w-full mt-4"
       @click="exportToFile"
     >
       Kurulum Dosyası Olarak Dışa Aktar
@@ -31,6 +37,7 @@ import IconCross from "../icons/icon-cross.svg";
 import store from "../global-state/store";
 import { computed } from "vue";
 import exportToFile from "../actions/exportToFile";
+import install from "../actions/install";
 export default {
   name: "Bucket",
   components: { IconCross },
@@ -45,6 +52,7 @@ export default {
       apps,
       bucket: store.bucket,
       removeFromBucket,
+      install: install.install,
       exportToFile: exportToFile.exportToFile,
     };
   },

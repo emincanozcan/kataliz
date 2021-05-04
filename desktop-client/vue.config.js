@@ -1,6 +1,7 @@
 module.exports = {
   pluginOptions: {
     electronBuilder: {
+      preload: "preload.js",
       builderOptions: {
         linux: {
           publish: ["github"],
