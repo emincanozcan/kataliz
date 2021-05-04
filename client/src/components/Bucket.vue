@@ -59,10 +59,10 @@ export default {
 
     if (IS_ELECTRON) {
       returnObj["install"] = install.install;
-      returnObj["exportToFile"] = exportToFile.webExport;
+      returnObj["exportToFile"] = exportToFile.pardusExport;
     } else {
       returnObj["install"] = () => {};
-      returnObj["exportToFile"] = exportToFile.pardusExport;
+      returnObj["exportToFile"] = exportToFile.webExport;
     }
     return returnObj;
   },
