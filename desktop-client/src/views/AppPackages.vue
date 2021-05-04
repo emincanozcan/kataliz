@@ -26,7 +26,7 @@
       <div
         v-for="pkg in filteredAppPackages"
         :key="pkg.id"
-        class="bg-gray-700 bg-opacity-50 rounded-xl shadow-lg pt-2 pb-8 overflow-hidden flex flex-col justify-between relative"
+        class="bg-gray-700 bg-opacity-50 rounded-xl shadow-xg pt-4 pb-8 overflow-hidden relative"
       >
         <button
           class="absolute rounded-tl-lg right-0 bottom-0 px-2 py-2 text-gray-900 bg-pardus-yellow flex items-center"
@@ -42,7 +42,7 @@
         >
           <IconCheck class="h-12 w-12 text-white" />
         </span>
-        <div>
+        <div class="mb-4">
           <img class="w-full object-contain h-24" :src="pkg.image_url" />
           <h3 class="font-medium text-gray-200 mx-4 text-xl mt-4">
             {{ pkg.name }}

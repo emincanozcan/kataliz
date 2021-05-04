@@ -3,11 +3,11 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      spacing: {
-        128: "36rem",
-      },
+      // spacing: {
+      //   128: "36rem",
+      // },
       colors: {
-        "pardus-yellow": "#FFCC00",
+        "pardus-yellow": "#ffcb01",
       },
     },
   },
