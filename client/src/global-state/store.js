@@ -21,11 +21,14 @@ async function fetchData() {
   }
 }
 
-function addToBucket(pardusAppId) {
-  if (bucket.value.includes(pardusAppId)) {
+function addToBucket(app) {
+  if (Array.isArray(app)) {
+    return app.forEach((a) => addToBucket(a));
+  }
+  if (bucket.value.includes(app)) {
     return;
   }
-  bucket.value.push(pardusAppId);
+  bucket.value.push(app);
 }
 
 function removeFromBucket(pardusAppId) {

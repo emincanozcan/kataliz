@@ -1,7 +1,7 @@
 <template>
-  <div class="px-4 border-t-2 border-gray-600 py-6">
-    <h2 class="mb-8 text-xl font-medium flex items-center justify-center">
-      Uygulama Sepeti <span class="text-base ml-2">({{ apps.length }})</span>
+  <div class="px-6 border-t-2 border-gray-600 py-6">
+    <h2 class="mb-8 text-xl font-medium">
+      Uygulama Sepeti <span class="ml-1">({{ apps.length }})</span>
     </h2>
     <div class="flex-1">
       <div class="relative mr-2" v-for="app in apps" :key="app.id">
@@ -13,7 +13,7 @@
           class="absolute px-1 py-1 transform top-1/2 -translate-y-1/2 bg-red-500 text-white -right-2 rounded-md"
           @click="removeFromBucket(app.id)"
         >
-          <IconCross class="w-2 h-2" />
+          <IconCross class="w-5 h-5" />
         </button>
       </div>
     </div>

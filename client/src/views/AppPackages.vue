@@ -26,45 +26,59 @@
       <div
         v-for="pkg in filteredAppPackages"
         :key="pkg.id"
-        class="bg-gray-700 bg-opacity-50 rounded-xl shadow-xg pt-4 pb-8 overflow-hidden relative"
+        class="bg-gray-700 bg-opacity-50 rounded-xl pt-4 pb-10 overflow-hidden relative px-4"
       >
         <button
           class="absolute rounded-tl-lg right-0 bottom-0 px-2 py-2 text-gray-900 bg-pardus-yellow flex items-center"
           v-if="!isInBucket(pkg['pardus_apps'])"
           @click="addToBucket(pkg['pardus_apps'])"
         >
-          <IconPlus class="w-4 h-4" />
-          <span class="font-medium text-sm">Sepete Ekle</span>
+          <span class="font-medium text-sm">Tümünü Sepete Ekle</span>
         </button>
         <span
           class="absolute rounded-tl-lg right-0 bottom-0 bg-green-600"
           v-else
         >
-          <IconCheck class="h-12 w-12 text-white" />
+          <IconCheck class="h-8 w-8 text-white" />
         </span>
-        <div class="mb-4">
-          <img class="w-full object-contain h-24" :src="pkg.image_url" />
-          <h3 class="font-medium text-gray-200 mx-4 text-xl mt-4">
+        <div class="mb-4 flex items-center justify-start">
+          <img
+            class="object-contain h-12 w-12 mr-4 rounded-full"
+            :src="pkg.image_url"
+          />
+          <h3 class="font-semibold text-gray-100 text-xl flex-1">
             {{ pkg.name }}
           </h3>
         </div>
-        <ul class="ml-8 mr-4 mt-4 list-decimal">
-          <li
-            v-for="app in getPardusAppsById(pkg['pardus_apps'])"
-            :key="app.id"
-            class="text-gray-300 text-sm"
-          >
-            <div class="flex items-center">
-              <span>{{ app.name }}</span>
-              <span
-                class="ml-1 flex items-center text-green-500"
-                v-if="isInBucket(app.id)"
-              >
-                <IconCheck class="h-6 w-6" />
-              </span>
+        <div
+          v-for="app in getPardusAppsById(pkg['pardus_apps'])"
+          :key="app.id"
+          class="bg-gray-700 my-3 px-4 py-3 rounded-lg shadow-md"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center mr-2">
+              <img
+                :src="app.image_url"
+                class="w-10 h-10 mr-4 rounded-full"
+                alt=""
+              />
+              <span class="text-gray-300 font-medium">{{ app.name }}</span>
             </div>
-          </li>
-        </ul>
+            <span
+              class="text-white bg-green-500 rounded-md px-1 py-1"
+              v-if="isInBucket(app.id)"
+            >
+              <IconCheck class="h-6 w-6" />
+            </span>
+            <button
+              v-else
+              class="text-gray-900 bg-pardus-yellow rounded-md px-1 py-1"
+              @click="addToBucket(app.id)"
+            >
+              <IconPlus class="h-6 w-6" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -103,17 +117,12 @@ export default {
         pardusAppIds.includes(item.id)
       );
     }
-
-    function addToBucket(pardusAppIds) {
-      pardusAppIds.forEach((id) => store.addToBucket(id));
-    }
-
     return {
       search,
       filteredAppPackages,
       isInBucket: store.isInBucket,
       getPardusAppsById,
-      addToBucket,
+      addToBucket: store.addToBucket,
     };
   },
 };

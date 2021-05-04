@@ -16,10 +16,14 @@
         :key="pardusApp.id"
         v-for="pardusApp in pardusAlternatives"
       >
-        <img class="w-10 h-10 mr-2" :src="pardusApp.image_url" alt="" />
+        <img
+          class="w-10 h-10 mr-4 rounded-full"
+          :src="pardusApp.image_url"
+          alt=""
+        />
         <span class="font-medium mr-4"> {{ pardusApp.name }}</span>
         <button
-          class="bg-pardus-yellow px-2 py-1 font-medium rounded-lg shadow-lg text-gray-900"
+          class="bg-pardus-yellow px-4 h-8 rounded-md shadow-md text-gray-900 text-sm"
           @click="addToBucket(pardusApp.id)"
           v-if="!isInBucket(pardusApp.id)"
         >
