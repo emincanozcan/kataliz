@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-import { dialog, app } from "electron";
+import { dialog, app, BrowserWindow } from "electron";
 
 export default function exportToFileListener(event, param) {
   dialog
@@ -17,21 +17,17 @@ export default function exportToFileListener(event, param) {
       properties: [],
     })
     .then((file) => {
-      // Stating whether dialog operation was cancelled or not.
       if (!file.canceled) {
-        const parsedPath = path.parse(file.filePath);
-        const dir = parsedPath.dir;
-        const name = parsedPath.name;
-        fs.writeFile(
-          path.join(dir, name + "_KURULUM.txt"),
-          `Kurulumu gerçekleştirmek için Pardus işletim sisteminde sırasıyla şu adımları takip ediniz.
-          // buraya kurulum talimatlari yazilacak.`,
-          function (err) {
-            if (err) throw err;
-          }
-        );
         fs.writeFile(file.filePath.toString(), param, function (err) {
-          if (err) throw err;
+          const parsedPath = path.parse(file.filePath);
+          console.log(parsedPath);
+          const fileName = parsedPath.name + parsedPath.ext;
+          if (err) {
+            throw err;
+          } else {
+            const window = BrowserWindow.getFocusedWindow();
+            window.webContents.send("open-installation-instructions", fileName);
+          }
         });
       }
     })

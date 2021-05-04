@@ -43,11 +43,16 @@ function webExport() {
     "data:text/plain;charset=utf-8," +
       encodeURIComponent(generateShellScriptFromBucket())
   );
-  element.setAttribute("download", "kataliz.sh");
+  element.setAttribute("download", "pardus-kataliz.sh");
   element.style.display = "none";
   document.body.appendChild(element);
   element.click();
   document.body.removeChild(element);
+  window.dispatchEvent(
+    new CustomEvent("open-installation-instructions", {
+      detail: { fileName: "pardus-kataliz.sh" },
+    })
+  );
 }
 
 export default {
