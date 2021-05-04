@@ -1,6 +1,6 @@
 {
-  "name": "desktop-client",
-  "version": "0.1.3",
+  "name": "pardus-kataliz",
+  "version": "0.2.0",
   "author": "Emincan Ozcan <emincan@emincanozcan.com>",
   "homepage": "https://github.com/emincanozcan/kataliz",
   "private": true,

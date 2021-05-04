@@ -3,6 +3,7 @@ module.exports = {
     electronBuilder: {
       preload: "preload.js",
       builderOptions: {
+        productName: "Pardus Kataliz",
         linux: {
           publish: ["github"],
           target: ["AppImage", "deb"],
