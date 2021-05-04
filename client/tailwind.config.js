@@ -26,7 +26,7 @@ module.exports = {
       // },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
-        ubuntu: ["Ubuntu"],
+        ubuntu: ["Ubuntu", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         "pardus-yellow": "#FFCC00",

@@ -20,6 +20,8 @@ async function createWindow() {
     show: false,
     width: 1200,
     height: 740,
+    // eslint-disable-next-line no-undef
+    icon: path.join(__static, "icon.png"),
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -28,6 +30,7 @@ async function createWindow() {
     },
   });
 
+  win.setMenu(null);
   win.maximize();
   win.show();
 

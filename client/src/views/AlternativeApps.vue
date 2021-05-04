@@ -6,7 +6,7 @@
           <input
             class="w-full h-12 pl-4 pr-16 font-medium text-sm text-gray-300 bg-gray-800 rounded-lg overflow-hidden transition-all outline-none border-2 border-gray-800 hover:border-pardus-yellow focus:border-pardus-yellow"
             type="text"
-            placeholder="Alıştığınız Uygulama"
+            placeholder="Alternatifi aranan uygulama"
             @input="search"
           />
           <IconSearch class="w-6 h-6 text-gray-300 absolute right-3 top-3" />
@@ -14,7 +14,7 @@
       </div>
       <div>
         <h4 class="text-gray-300 font-medium lg:text-lg">
-          Alıştığınız Uygulamanın
+          Aradığınız Uygulamanın
           <span class="text-pardus-yellow font-bold">PARDUS</span>
           Alternatifleri!
         </h4>

@@ -18,14 +18,14 @@
       </div>
     </div>
     <button
-      class="bg-pardus-yellow px-4 py-2 text-sm text-gray-900 font-medium rounded-md shadow-md w-full mt-4"
+      class="bg-pardus-yellow px-4 py-2 text-center text-sm text-left tracking-wide text-gray-800 rounded-md shadow-md w-full mt-4"
       v-if="IS_ELECTRON && bucket.length > 0"
       @click="install"
     >
       Kurulumu Gerçekleştir
     </button>
     <button
-      class="bg-pardus-yellow px-4 py-2 text-sm text-gray-900 font-medium rounded-md shadow-md w-full mt-4"
+      class="bg-pardus-yellow px-4 py-2 text-center text-sm text-left tracking-wide text-gray-800 rounded-md shadow-md w-full mt-4"
       v-if="bucket.length > 0"
       @click="exportToFile"
     >
