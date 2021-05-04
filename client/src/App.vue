@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="installationOpen"
+    v-if="IS_ELECTRON && installationOpen"
     class="bg-gray-900 h-screen flex items-center justify-center"
   >
     <Installation @close="onInstallationEnd" />
@@ -27,19 +27,27 @@ import Installation from "./views/Installation";
 export default {
   components: { Installation, Loading, Sidebar },
   setup() {
+    const { IS_ELECTRON } = process.env;
     store.fetchData().then(() => {
       store.loading.value = false;
     });
-
+    if (IS_ELECTRON) {
+      window.ipcRenderer.on(
+        "installation-start",
+        () => (installationOpen.value = true)
+      );
+    }
     const installationOpen = ref(false);
-    window.ipcRenderer.on("installation-start", () => {
-      installationOpen.value = true;
-    });
     function onInstallationEnd() {
       installationOpen.value = false;
     }
 
-    return { loading: store.loading, installationOpen, onInstallationEnd };
+    return {
+      loading: store.loading,
+      installationOpen,
+      onInstallationEnd,
+      IS_ELECTRON,
+    };
   },
 };
 </script>

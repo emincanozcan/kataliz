@@ -19,6 +19,7 @@
     </div>
     <button
       class="bg-pardus-yellow px-4 py-2 text-sm text-gray-900 font-medium rounded-md shadow-md w-full mt-4"
+      v-if="IS_ELECTRON"
       @click="install"
     >
       Kurulumu Gerçekleştir
@@ -42,19 +43,28 @@ export default {
   name: "Bucket",
   components: { IconCross },
   setup() {
+    const { IS_ELECTRON } = process.env;
     const apps = computed(() => {
       return store.bucket.value.map((appId) => {
         return store.pardusApps.value.find((item) => item.id === appId);
       });
     });
-    const removeFromBucket = store.removeFromBucket;
-    return {
+
+    const returnObj = {
+      IS_ELECTRON,
       apps,
       bucket: store.bucket,
-      removeFromBucket,
-      install: install.install,
-      exportToFile: exportToFile.exportToFile,
+      removeFromBucket: store.removeFromBucket,
     };
+
+    if (IS_ELECTRON) {
+      returnObj["install"] = install.install;
+      returnObj["exportToFile"] = exportToFile.webExport;
+    } else {
+      returnObj["install"] = () => {};
+      returnObj["exportToFile"] = exportToFile.pardusExport;
+    }
+    return returnObj;
   },
 };
 </script>

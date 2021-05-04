@@ -32,11 +32,26 @@ echo "Kurulum öncesi hazırlıklar tamamlandı. Yüklemeler başlatılıyor."
   return script;
 }
 
-function exportToFile() {
+function pardusExport() {
   window.ipcRenderer.send("exportBucket", generateShellScriptFromBucket());
+}
+
+function webExport() {
+  const element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," +
+      encodeURIComponent(generateShellScriptFromBucket())
+  );
+  element.setAttribute("download", "kataliz.sh");
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 }
 
 export default {
   generateShellScriptFromBucket,
-  exportToFile,
+  pardusExport,
+  webExport,
 };
