@@ -1,6 +1,6 @@
 {
   "name": "pardus-kataliz",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Emincan Ozcan <emincan@emincanozcan.com>",
   "homepage": "https://github.com/emincanozcan/kataliz",
   "private": true,
@@ -36,6 +36,7 @@
     "babel-eslint": "^10.1.0",
     "electron": "^11.0.0",
     "electron-devtools-installer": "^3.1.0",
+    "electron-icon-builder": "^2.0.1",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.0.0",
