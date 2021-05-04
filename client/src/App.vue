@@ -15,7 +15,9 @@
     <Sidebar
       class="sticky top-0 h-screen w-80 bg-gray-700 bg-opacity-25 flex-shrink-0"
     />
-    <router-view class="flex-1 bg-gray-900 mx-6" />
+    <transition name="fade">
+      <router-view class="flex-1 bg-gray-900 mx-6" />
+    </transition>
   </div>
 </template>
 <script>
@@ -51,3 +53,14 @@ export default {
   },
 };
 </script>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
