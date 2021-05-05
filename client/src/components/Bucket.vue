@@ -1,6 +1,6 @@
 <template>
   <div class="px-4 border-t-2 border-gray-600 py-6">
-    <h2 class="mb-8 text-xl font-medium">
+    <h2 class="mb-8 text-center text-xl font-medium">
       Uygulama Sepeti <span class="ml-1">({{ apps.length }})</span>
     </h2>
     <div class="flex-1">
