@@ -21,9 +21,9 @@ module.exports = {
       // },
     },
     extend: {
-      // spacing: {
-      //   128: "36rem",
-      // },
+      spacing: {
+        84: "21rem",
+      },
       fontFamily: {
         sans: ["Roboto", ...defaultTheme.fontFamily.sans],
         ubuntu: ["Ubuntu", ...defaultTheme.fontFamily.sans],

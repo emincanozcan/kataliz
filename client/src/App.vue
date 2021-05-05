@@ -18,7 +18,7 @@
   </div>
   <div v-else class="bg-gray-900 text-gray-100 min-h-screen flex">
     <Sidebar
-      class="sticky top-0 h-screen w-80 bg-gray-700 bg-opacity-25 flex-shrink-0"
+      class="sticky top-0 h-screen w-84 bg-gray-700 bg-opacity-25 flex-shrink-0"
     />
     <transition name="fade">
       <router-view class="flex-1 bg-gray-900 mx-6" />

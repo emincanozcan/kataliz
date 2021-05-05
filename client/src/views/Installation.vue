@@ -22,13 +22,13 @@
           <span class="text-red-600" v-else-if="item.status === 'error'">
             Kurulumda Bir Hata Oluştu
           </span>
-          <span class="text-white" v-else-if="item.status === 'in-progress'">
-            Yükleniyor..
-          </span>
           <span
             class="text-pardus-yellow"
-            v-else-if="item.status === 'waiting'"
+            v-else-if="item.status === 'in-progress'"
           >
+            Yükleniyor..
+          </span>
+          <span class="text-white" v-else-if="item.status === 'waiting'">
             Diğer kurulumlar bekleniyor
           </span>
         </div>
