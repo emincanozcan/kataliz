@@ -10,7 +10,7 @@ function generateInstallationScriptFromBucket() {
     scripts.push(
       'find /etc/apt/sources.list.d/ -name "*.save" -type f -delete'
     );
-    const cmd = scripts.join(";");
+    const cmd = scripts.join(" && ");
     return { id, cmd };
   });
 }

@@ -14,17 +14,27 @@ class PardusAppSeeder extends Seeder
      */
     public function run()
     {
+//        PardusApp::create([
+//            'name' => 'Spotify',
+//            'image_url' => "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
+//            'scripts' => [
+//                'sudo apt install curl -y',
+//                'sudo curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -',
+//                'sudo echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list',
+//                'sudo apt-get update -y',
+//                'sudo apt-get install spotify-client -y'
+//            ]
+//        ]);
+
+
         PardusApp::create([
             'name' => 'Spotify',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg",
             'scripts' => [
-                'sudo apt install curl -y',
-                'sudo curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -',
-                'sudo echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list',
-                'sudo apt-get update -y',
                 'sudo apt-get install spotify-client -y'
             ]
         ]);
+
         PardusApp::create([
             'name' => 'Audacity',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/f/f6/Audacity_Logo.svg",
@@ -46,11 +56,7 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Krita',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/7/73/Calligrakrita-base.svg",
-            'scripts' => [
-                "sudo add-apt-repository ppa:kritalime/ppa -y",
-                "sudo apt update -y",
-                "sudo apt-get install krita -y"
-            ]
+            'scripts' => ["sudo apt-get install krita -y"]
         ]);
 
         PardusApp::create([
@@ -61,14 +67,10 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Evince',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/9/9b/GNOME_Document_Viewer_icon_2019.svg",
-            'scripts' => [
-                "sudo add-apt-repository ppa:gnome3-team/gnome3-y",
-                "sudo apt-get update -y",
-                "sudo apt-get install evince - y",
-            ]
+            'scripts' => ["sudo apt-get install evince - y",]
         ]);
 
-        PardusApp::create ([
+        PardusApp::create([
             'name' => 'Git',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg",
             'scripts' => [
@@ -76,7 +78,7 @@ class PardusAppSeeder extends Seeder
             ]
         ]);
 
-        PardusApp::create ([
+        PardusApp::create([
             'name' => 'Git Cola',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/a/a6/Breezeicons-apps-48-git-cola.svg",
             'scripts' => [
@@ -93,6 +95,7 @@ class PardusAppSeeder extends Seeder
                 "sudo rm -f gitkraken-amd64.deb",
             ]
         ]);
+
         PardusApp::create([
             'name' => 'QBittorrent',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/6/66/New_qBittorrent_Logo.svg",
@@ -118,17 +121,21 @@ class PardusAppSeeder extends Seeder
             ]
         ]);
 
+//        PardusApp::create([
+//            'name' => 'Zoom',
+//            'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
+//            'scripts' => [
+//                'sudo wget https://zoom.us/client/latest/zoom_amd64.deb',
+//                'sudo apt --fix-broken install ~/zoom_amd64.deb -y',
+//                'sudo rm -f zoom_amd64.deb',
+//            ]
+//        ]);
+
         PardusApp::create([
             'name' => 'Zoom',
             'image_url' => "https://seeklogo.com/images/Z/zoom-fondo-azul-vertical-logo-8246E36E95-seeklogo.com.png",
-            'scripts' => [
-                'sudo wget https://zoom.us/client/latest/zoom_amd64.deb',
-                'sudo apt --fix-broken install ~/zoom_amd64.deb -y',
-                'sudo rm -f zoom_amd64.deb',
-            ]
+            'scripts' => ['sudo apt install zoom -y']
         ]);
-
-
         PardusApp::create([
             'name' => 'Visual Studio Code (VS CODE)',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg",
@@ -163,11 +170,7 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Libre Office',
             'image_url' => "https://logos-download.com/wp-content/uploads/2020/06/LibreOffice_Logo_2.png",
-            'scripts' => [
-                'sudo add-apt-repository ppa:libreoffice/ppa -y',
-                'sudo apt update -y',
-                'sudo apt install libreoffice -y',
-            ]
+            'scripts' => ['sudo apt install libreoffice -y',]
         ]);
 
         PardusApp::create([
@@ -179,7 +182,7 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Mozilla Firefox',
             'image_url' => "https://www.mozilla.org/media/protocol/img/logos/firefox/browser/logo.eb1324e44442.svg",
-            'scripts' => ['sudo apt install firefox -y']
+            'scripts' => ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']
         ]);
 
         PardusApp::create([
@@ -197,14 +200,14 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Kdenlive',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Kdenlive-logo.svg/1280px-Kdenlive-logo.svg.png",
-            'scripts' => ['sudo add-apt-repository ppa:kdenlive/kdenlive-stable -y','sudo apt update -y','sudo apt install kdenlive -y']
+            'scripts' => ['sudo apt install kdenlive -y']
         ]);
 
         PardusApp::create([
             'name' => 'OpenShot',
             'image_url' => "https://w1.pngwing.com/pngs/392/185/png-transparent-openshot-personal-protective-equipment-video-editing-software-free-and-opensource-software-film-editing-nonlinear-editing-system-macos-avs-video-editor-computer-software-thumbnail.png",
             'scripts' => [
-                'sudo add-apt-repository ppa:openshot.developers/ppa -y', 'sudo apt update -y', 'sudo apt-get install openshot-qt -y'
+                'sudo apt-get install openshot-qt -y'
             ]
         ]);
 
@@ -221,7 +224,7 @@ class PardusAppSeeder extends Seeder
             'image_url' => "https://banner2.cleanpng.com/20190124/rs/kisspng-python-selenium-programming-language-computer-icon-pip-5c4a4a7ca92d33.171618491548372604693.jpg",
             'scripts' => [
                 'sudo apt install python3-pip -y',
-             ]
+            ]
         ]);
     }
 }

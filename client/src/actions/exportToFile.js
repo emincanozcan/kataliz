@@ -7,7 +7,6 @@ function generateShellScriptFromBucket() {
 logDate=$(date +%s)
 echo "Kurulum öncesi hazırlıklar gerçekleştiriliyor. "
 sudo apt update -y ${outputRedirection}
-sudo apt-get install software-properties-common -y ${outputRedirection}
 echo "Kurulum öncesi hazırlıklar tamamlandı. Yüklemeler başlatılıyor."
 `;
 

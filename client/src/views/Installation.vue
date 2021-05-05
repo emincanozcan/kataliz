@@ -44,6 +44,10 @@ export default {
   setup() {
     const isEnd = ref(false);
     const installationState = reactive({});
+    installationState["pre-installation"] = {
+      name: "Ön Kurulumlar",
+      status: "Hazırlanıyor...",
+    };
     store.bucket.value.forEach((appId) => {
       const app = store.pardusApps.value.find((app) => app.id === appId);
       installationState[app.id] = {
@@ -58,6 +62,8 @@ export default {
         installationState[data.id].status = "Kurulum tamamlandı.";
       } else if (data.status === "in-progress") {
         installationState[data.id].status = "Kuruluyor.";
+      } else if (data.status === "error") {
+        installationState[data.id].status = "Hata: Kurulum tamamlanamadı.";
       }
     });
 

@@ -14,23 +14,24 @@ export default function installListener(event, data) {
   const window = BrowserWindow.getFocusedWindow();
   window.webContents.send("open-installation-screen");
   clearTmp();
-  // state = {};
+
+  const preInstallationCheckPath = getCheckPath("pre-installation");
+
   const watcherInterval = setInterval(() => watcher(window), 100);
   const command =
-    "apt update -y; apt install -y software-properties-common;" +
+    `cat /dev/null > ${preInstallationCheckPath} && echo 'in-progress' > ${preInstallationCheckPath};
+     ( ( apt update -y && echo 'end' > ${preInstallationCheckPath} ) || 
+     echo 'error' > ${preInstallationCheckPath} ); ` +
     data
       .map((app) => {
         const checkPath = getCheckPath(app.id);
         const shellPath = getShellPath(app.id);
         console.log({ checkPath, shellPath });
-        return `cat /dev/null > ${checkPath}; 
-      echo 'in-progress' > ${checkPath};
-      cat /dev/null > ${shellPath};  
-      echo '${app.cmd}' > ${shellPath}; 
-      sh ${shellPath};
-      echo 'end' > ${checkPath};`;
+        return ` cat /dev/null > ${checkPath}; echo 'in-progress' > ${checkPath}; cat /dev/null > ${shellPath}; echo '${app.cmd}' > ${shellPath};
+        ( (sh ${shellPath} && echo 'end' > ${checkPath}) || ( echo 'error' > ${checkPath}) ); `;
       })
       .join("");
+  // return console.log(command);
   window.webContents.send("installation-start");
   sudo.exec(command, { name: "Pardus Kataliz" }, (err, stdout, stderr) => {
     if (err) {
