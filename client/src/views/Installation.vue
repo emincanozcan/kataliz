@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full px-8 py-8 text-gray-100 flex justify-center items-center flex-col bg-gray-800"
+    class="w-full min-h-screen h-full px-8 py-8 text-gray-100 flex justify-center items-center flex-col bg-gray-800"
   >
     <h2 class="text-2xl font-bold text-pardus-yellow mb-4">
       Kurulumlar Gerçekleştiriliyor.

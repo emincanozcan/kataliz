@@ -4,6 +4,7 @@ module.exports = {
       preload: "preload.js",
       builderOptions: {
         productName: "Pardus Kataliz",
+        afterPack: "./build/afterpack.js",
         linux: {
           publish: ["github"],
           target: ["AppImage", "deb"],

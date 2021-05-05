@@ -6,13 +6,13 @@
   />
   <div
     v-if="IS_ELECTRON && installationOpen"
-    class="bg-gray-900 min-h-screen flex items-center justify-center"
+    class="bg-gray-900 flex items-center justify-center"
   >
     <Installation @close="onInstallationEnd" />
   </div>
   <div
     v-else-if="loading"
-    class="bg-gray-900 min-h-screen flex items-center justify-center"
+    class="bg-gray-900 h-screen flex items-center justify-center"
   >
     <Loading loading-message="Uygulama Listesi Yükleniyor" />
   </div>

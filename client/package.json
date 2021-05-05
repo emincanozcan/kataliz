@@ -1,6 +1,6 @@
 {
   "name": "pardus-kataliz",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "Emincan Ozcan <emincan@emincanozcan.com>",
   "homepage": "https://github.com/emincanozcan/kataliz",
   "private": true,
@@ -42,6 +42,7 @@
     "eslint-plugin-vue": "^7.0.0",
     "postcss": "^7",
     "prettier": "^2.2.1",
+    "process": "^0.11.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.6",
     "vue-svg-loader": "^0.17.0-beta.2"
