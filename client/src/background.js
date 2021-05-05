@@ -6,7 +6,6 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import exportToFileListener from "./electron-listeners/exportToFileListener";
 import installListener from "./electron-listeners/installListener";
 
-console.log({ __dirname });
 const isDevelopment = process.env.NODE_ENV !== "production";
 const path = require("path");
 // Scheme must be registered before the app is ready
@@ -60,9 +59,7 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 app.commandLine.appendSwitch("force-color-profile", "srgb");
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+app.commandLine.appendSwitch("--no-sandbox");
 app.on("ready", async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
