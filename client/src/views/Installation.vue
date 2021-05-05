@@ -2,24 +2,40 @@
   <div
     class="w-full min-h-screen h-full px-8 py-8 text-gray-100 flex justify-center items-center flex-col bg-gray-800"
   >
-    <h2 class="text-2xl font-bold text-pardus-yellow mb-4">
+    <IconPardusLogo class="w-48 h-48 animate-pulse mb-4" />
+    <h2 class="text-2xl font-bold text-pardus-yellow mb-16">
       Kurulumlar Gerçekleştiriliyor.
     </h2>
-    <IconPardusLogo class="w-48 h-48 animate-pulse mb-16" />
     <div class="space-y-4 mb-16">
       <div
         class="rounded-lg bg-gray-900 shadow-lg px-6 flex items-center py-4 font-medium space-x-8"
         v-for="(item, key) in installationState"
         :key="key"
       >
-        <div class="inline-block w-64 border-r border-gray-300">
+        <div class="text-white inline-block w-64 border-r border-gray-300">
           {{ item.name }}
         </div>
-        <div class="inline-block">{{ item.status }}</div>
+        <div class="inline-block font-medium">
+          <span class="text-green-600" v-if="item.status === 'end'">
+            Kurulum Tamamlandı
+          </span>
+          <span class="text-red-600" v-else-if="item.status === 'error'">
+            Kurulumda Bir Hata Oluştu
+          </span>
+          <span class="text-white" v-else-if="item.status === 'in-progress'">
+            Yükleniyor..
+          </span>
+          <span
+            class="text-pardus-yellow"
+            v-else-if="item.status === 'waiting'"
+          >
+            Diğer kurulumlar bekleniyor
+          </span>
+        </div>
       </div>
     </div>
     <div v-if="isEnd" class="text-center">
-      <div class="font-medium text-lg">Kurulumlar tamamlandı!</div>
+      <div class="font-medium text-2xl">Kurulumlar tamamlandı!</div>
       <button
         class="mx-auto mt-4 inline-block px-8 py-3 bg-pardus-yellow text-black rounded-lg shadow-lg"
         @click="$emit('close')"
@@ -35,7 +51,7 @@
 
 <script>
 import store from "../global-state/store";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import IconPardusLogo from "../icons/icon-pardus-logo.svg";
 
 export default {
@@ -43,31 +59,35 @@ export default {
   components: { IconPardusLogo },
   setup() {
     const isEnd = ref(false);
-    const installationState = reactive({});
-    installationState["pre-installation"] = {
+    const installationState = ref([]);
+    installationState.value.push({
+      key: "pre-installation",
       name: "Ön Kurulumlar",
-      status: "Hazırlanıyor...",
-    };
+      status: "waiting",
+    });
+
     store.bucket.value.forEach((appId) => {
       const app = store.pardusApps.value.find((app) => app.id === appId);
-      installationState[app.id] = {
+      installationState.value.push({
+        key: app.id,
         name: app.name,
-        status: "Diğer kurulumlar bekleniyor.",
-      };
+        status: "waiting",
+      });
     });
 
     window.ipcRenderer.on("installation-update", (event, data) => {
-      console.log({ data });
-      if (data.status === "end") {
-        installationState[data.id].status = "Kurulum tamamlandı.";
-      } else if (data.status === "in-progress") {
-        installationState[data.id].status = "Kuruluyor.";
-      } else if (data.status === "error") {
-        installationState[data.id].status = "Hata: Kurulum tamamlanamadı.";
-      }
+      const index = installationState.value.findIndex(
+        (i) => i.key.toString() === data.id
+      );
+      installationState.value[index].status = data.status;
     });
 
-    window.ipcRenderer.on("installation-end", () => (isEnd.value = true));
+    window.ipcRenderer.on("installation-end", () => {
+      installationState.value.forEach(
+        (item) => item.status === "end" && store.removeFromBucket(item.key)
+      );
+      isEnd.value = true;
+    });
 
     return { installationState, isEnd };
   },

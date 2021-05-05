@@ -67,7 +67,7 @@ class PardusAppSeeder extends Seeder
         PardusApp::create([
             'name' => 'Evince',
             'image_url' => "https://upload.wikimedia.org/wikipedia/commons/9/9b/GNOME_Document_Viewer_icon_2019.svg",
-            'scripts' => ["sudo apt-get install evince - y",]
+            'scripts' => ["sudo apt-get install evince -y",]
         ]);
 
         PardusApp::create([
