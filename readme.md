@@ -1,20 +1,20 @@
-- [Pardus Kataliz Nedir?](#pardus-kataliz-nedir)
+# Pardus Kataliz
+
+Pardus Kataliz, Pardus'a geçiş planlayan ya da yeni geçmiş kullanıcılar düşünülerek tasarlanmış bir uygulama mağazasıdır. Kullanıcılara masaüstü uygulaması ve web sitesi olarak hizmet sunar. 
+
+Pardus kullanan kullanıcılar Kataliz Pardus uygulaması ile en iyi deneyimi elde ederken, Pardus'u henüz kurmamış kullanıcılar Kataliz web sürümü üzerinden pek çok özelliğe erişim sağlayabilmekte ve Pardus'a geçiş yapmak için ön hazırlık gerçekleştirebilmektedir. 
+
+Proje, Türkiye Açık Kaynak Platformu tarafından gerçekleştirilen Açık Kaynak Hackathon Programı kapsamında hayata geçirilmiştir.
+
+Uygulamanın amaç ve kullanımına dair hazırlanan videoyu [Youtube üzerinden izlemek için tıklayınız.](https://www.youtube.com/watch?v=FICAoZfK9Po)
+# Doküman İçerik Tablosu 
+
 - [Projeye Neden Kataliz İsmi Verildi?](#projeye-neden-kataliz-i̇smi-verildi)
 - [Yazılım Detayları / Geliştirme](#yazılım-detayları--geliştirme)
   - [Arka Uç](#arka-uç)
   - [Pardus ve Web Uygulaması](#pardus-ve-web-uygulaması)
 - [Katalizi Nasıl - Nereden Test Edebilirim?](#katalizi-nasıl---nereden-test-edebilirim)
 - [Lisans](#lisans)
-
-# Pardus Kataliz Nedir?
-
-Pardus Kataliz, Pardus'a geçiş planlayan ya da yeni geçmiş kullanıcılar düşünülerek tasarlanmış bir uygulama mağazasıdır. Kullanıcılara masaüstü uygulaması ve web sitesi olarak hizmet sunar. 
-
-Halihazırda Pardus işletim sistemini kurmuş olan kullanıcılar Kataliz Pardus uygulaması ile daha zengin bir deneyim elde ederken, Pardus'u henüz kurmamış kullanıcılar Kataliz web sürümü üzerinden pek çok özelliğe erişim sağlayabilmekte ve Pardus'a geçiş yapmak için ön hazırlık gerçekleştirebilmektedir. 
-
-Proje, Türkiye Açık Kaynak Platformu tarafından gerçekleştirilen Açık Kaynak Hackathon Programı kapsamında hayata geçirilmiştir.
-
-Uygulamanın amaç ve kullanımına dair hazırlanan videoyu [Youtube üzerinden izlemek için tıklayınız.](https://www.youtube.com/watch?v=FICAoZfK9Po)
 
 # Projeye Neden Kataliz İsmi Verildi?
 
@@ -55,7 +55,7 @@ Kataliz'in Pardus uygulaması Electron - Vue altyapısıyla hazırlanmaktadır. 
 İlgili uygulama(lar) proje içerisinde client klasöründe konumlandırılmıştır. 
 
 Uygulamaları geliştirme ortamında çalıştırabilmek ya da paketleyebilmek için;
-  * İlk olarak `npm install` ya da `yarn` komutlarıyl a bağımlılıklar indirilmeli,
+  * İlk olarak `npm install` ya da `yarn` komutlarıyla bağımlılıklar indirilmeli,
   * Geliştirme ortamını ayağa kaldırmak için;
     * Masaüstü versiyonu için `yarn electron:serve` komutu
     * Web versiyonu için `yarn serve` komutu
@@ -70,9 +70,11 @@ Masaüstü uygulaması için paketleme işlemi yapıldığında, appimage ve deb
 
 # Katalizi Nasıl - Nereden Test Edebilirim?
 
-Geliştirilen uygulamaya doğrudan erişim için;
+Uygulamayı bu depo üzerinden klonlayarak, üst bölümde anlatılan adımlar aracılığıyla bilgisayarınızda çalıştırabilir, tüm özellikleri test edebilirsiniz.
 
-* Masaüstü uygulaması; github üzerinden çeşitli versiyonlarla birlikte indirilmeye sunulmaktadır. https://github.com/emincanozcan/kataliz/releases adresi üzerinden indirilebilir.
+Geliştirilen uygulamaya doğrudan erişim sağlamak için;
+
+* Masaüstü uygulaması; Uygulama Github actions ile paketlenmekte ve Github üzerinden çeşitli versiyonlarla birlikte indirilmeye sunulmaktadır. https://github.com/emincanozcan/kataliz/releases adresinden uygulama temin edilebilir, son sürüm önerilir.
 * Web uygulaması; [kataliz.emincanozcan.com](https://kataliz.emincanozcan.com) adresi üzerinden yayınlanmaktadır, bu adres üzerinden incelenebilir.
 * Arka uç ve yönetici paneli; [kataliz-admin.emincanozcan.com](https://kataliz-admin.emincanozcan.com) adresi üzerinden yayınlanmaktadır. İlgili yönetim paneline yetkisiz erişim, bu arka uca bağlanan uygulamalarda istenmeyen etkiler yaratabileceğinden yönetici bilgileri paylaşılmamaktadır. Yönetici erişimi için `emincanozcann@gmail.com` üzerinden iletişime geçilebilir.
 
