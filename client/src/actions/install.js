@@ -16,7 +16,6 @@ function generateInstallationScriptFromBucket() {
 }
 
 function install() {
-  // console.log(generateInstallationScriptFromBucket());
   window.ipcRenderer.send("install", generateInstallationScriptFromBucket());
 }
 

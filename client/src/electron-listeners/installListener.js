@@ -3,7 +3,6 @@ const fs = require("fs");
 const { BrowserWindow, app } = require("electron");
 const sudo = require("sudo-prompt");
 const { exec } = require("child_process");
-// let state;
 
 const basePath = path.join(app.getPath("appData"), "tmp", "program");
 const baseCheckPath = path.join(basePath, "check");
@@ -31,7 +30,6 @@ export default function installListener(event, data) {
         ( (sh ${shellPath} && echo 'end' > ${checkPath}) || ( echo 'error' > ${checkPath}) ); `;
       })
       .join("");
-  // return console.log(command);
   window.webContents.send("installation-start");
   sudo.exec(command, { name: "Pardus Kataliz" }, (err, stdout, stderr) => {
     if (err) {
@@ -68,9 +66,6 @@ function watcher(window) {
   fs.readdirSync(baseCheckPath).forEach((file) => {
     const id = file.replace(".txt", "");
     const status = fs.readFileSync(getCheckPath(id)).toString().trim();
-    // if (typeof state[id] === "undefined" || state[id] !== status) {
-    //   state[id] = status;
     window.webContents.send("installation-update", { id, status });
-    // }
   });
 }

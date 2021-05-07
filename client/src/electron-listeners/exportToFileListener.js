@@ -20,7 +20,6 @@ export default function exportToFileListener(event, param) {
       if (!file.canceled) {
         fs.writeFile(file.filePath.toString(), param, function (err) {
           const parsedPath = path.parse(file.filePath);
-          console.log(parsedPath);
           const fileName = parsedPath.name + parsedPath.ext;
           if (err) {
             throw err;

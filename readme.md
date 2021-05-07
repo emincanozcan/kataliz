@@ -1,26 +1,38 @@
-# Pardus Kataliz!
+- [Pardus Kataliz Nedir?](#pardus-kataliz-nedir)
+- [Projeye Neden Kataliz İsmi Verildi?](#projeye-neden-kataliz-i̇smi-verildi)
+- [Yazılım Detayları / Geliştirme](#yazılım-detayları--geliştirme)
+  - [Arka Uç](#arka-uç)
+  - [Pardus ve Web Uygulaması](#pardus-ve-web-uygulaması)
+- [Katalizi Nasıl - Nereden Test Edebilirim?](#katalizi-nasıl---nereden-test-edebilirim)
+- [Lisans](#lisans)
 
-## Nedir?
+# Pardus Kataliz Nedir?
 
-Pardus Kataliz, Pardus'a geçiş planlayan kullanıcılar düşünülerek tasarlanmış bir uygulama mağazasıdır. Kullanıcılara masaüstü uygulaması ve web sitesi olarak hizmet sunar. Halihazırda Pardus işletim sistemini kurmuş olan kullanıcılar Kataliz Pardus uygulaması ile daha zengin bir deneyim elde ederken, Pardus'u henüz kurmamış kullanıcılar Kataliz web sürümü üzerinden pek çok özelliğe erişim sağlayabilmekte ve Pardus'a geçiş yapmak için ön hazırlık gerçekleştirebilmektir. 
+Pardus Kataliz, Pardus'a geçiş planlayan ya da yeni geçmiş kullanıcılar düşünülerek tasarlanmış bir uygulama mağazasıdır. Kullanıcılara masaüstü uygulaması ve web sitesi olarak hizmet sunar. 
 
-## İsmi Neden Kataliz?
+Halihazırda Pardus işletim sistemini kurmuş olan kullanıcılar Kataliz Pardus uygulaması ile daha zengin bir deneyim elde ederken, Pardus'u henüz kurmamış kullanıcılar Kataliz web sürümü üzerinden pek çok özelliğe erişim sağlayabilmekte ve Pardus'a geçiş yapmak için ön hazırlık gerçekleştirebilmektedir. 
 
-Kataliz; katalizor adı verilen kimyasalların, bir kimyasal tepkime için ihtiyaç duyulan enerjiyi düşürmesi ve tepkime sürecini ciddi anlamda hızlandırması işlemine denir.
+Proje, Türkiye Açık Kaynak Platformu tarafından gerçekleştirilen Açık Kaynak Hackathon Programı kapsamında hayata geçirilmiştir.
 
-Geliştirilen uygulama mağazasının hedefi; kullanıcıların Pardus uygulama arayış - kurulum süreçlerine harcayacakları enerjiyi ve vakti azaltmak olduğundan, Kataliz ismi tercih edilmiştir. 
+Uygulamanın amaç ve kullanımına dair hazırlanan videoyu [Youtube üzerinden izlemek için tıklayınız.](https://www.youtube.com/watch?v=FICAoZfK9Po)
 
-## Yazılım Detayları / Geliştirme
+# Projeye Neden Kataliz İsmi Verildi?
 
-Pardus Kataliz projesi; bir adet Pardus uygulaması, bir adet web uygulaması ve istemcilerin veri kaynağı olarak kullandığı - yönetici paneli de barındıran bir arka uç uygulamasından bir oluşur.
+Kataliz; katalizör adı verilen kimyasalların, bir kimyasal tepkime için ihtiyaç duyulan enerjiyi düşürmesi ve tepkime sürecini ciddi anlamda hızlandırması işlemine denir.
+
+Geliştirilen uygulama mağazasının hedefi; kullanıcıların Pardus uygulama arayış ve kurulum süreçlerine harcayacakları enerjiyi ve vakti azaltmak olduğundan, Kataliz ismi tercih edilmiştir.
+
+# Yazılım Detayları / Geliştirme
+
+Pardus Kataliz projesi; bir adet Pardus uygulaması, bir adet web uygulaması ve bu 2 istemcinin veri kaynağı olarak kullandığı - yönetici paneli de barındıran bir arka uç uygulamasından bir oluşur.
 
 Uygulamanın Pardus ve web versiyonları birlikte geliştirilmekte, aynı kod tabanını paylaşmaktadır.
 
-### Arka Uç
+## Arka Uç
 
 Uygulamanın veri kaynağı olarak kullanılan bir API ve yönetim paneli sağlar. Laravel / Jetstream altyapısıyla hayata geçirilmiştir. Proje dizininde yer alan backend klasörü üzerinden erişilebilir.
 
-Yönetim Panelinde Bulunan Temel özellikler;
+**Yönetim Panelinde Bulunan Temel Özellikler;**
 * Pardus uygulaması ekleyebilme ve yönetebilme
   * Uygulama adı
   * Uygulama görseli
@@ -36,14 +48,14 @@ Yönetim Panelinde Bulunan Temel özellikler;
 
 Arka uç için geliştirme ortamı olarak Laravel Sail altyapısından faydalanılmaktadır. Farklı ortamlar üzerinde de geliştirmeye devam edilebilir ancak Laravel Sail kullanımı önerilmektedir. Laravel Sail kullanımına dair detaylar [laravel.com/docs/8.x/sail](https://laravel.com/docs/8.x/sail) adresinden incelenebilir.
 
-### Pardus ve Web Uygulaması
+## Pardus ve Web Uygulaması
 
-Kataliz'in Pardus uygulaması Electron - Vue alt yapısıyla hazırlanmaktadır. Pardus uygulaması ve Web uygulaması tek bir kod tabanı üzerinde geliştirilmektedir. Pardus uygulaması, Web uygulamasına ek olarak uygulama içerisinden kurulum desteği de sağlamaktadır. Pardus sürümünde yer alan bir takım özelliklerin devre dışı bırakılması veya Web'e uyarlanmasıyla Web sürümü ortaya çıkmaktadır.
+Kataliz'in Pardus uygulaması Electron - Vue altyapısıyla hazırlanmaktadır. Pardus uygulaması ve Web uygulaması tek bir kod tabanı üzerinde geliştirilmektedir. Pardus uygulaması, Web uygulamasına ek olarak uygulama içerisinden kurulum desteği de sağlamaktadır. Pardus sürümünde yer alan bir takım özelliklerin devre dışı bırakılması veya Web'e uyarlanmasıyla Web sürümü ortaya çıkmaktadır.
 
 İlgili uygulama(lar) proje içerisinde client klasöründe konumlandırılmıştır. 
 
 Uygulamaları geliştirme ortamında çalıştırabilmek ya da paketleyebilmek için;
-  * İlk olarak `npm install` ya da `yarn` komutlarıyla bağımlılıklar indirilmeli,
+  * İlk olarak `npm install` ya da `yarn` komutlarıyl a bağımlılıklar indirilmeli,
   * Geliştirme ortamını ayağa kaldırmak için;
     * Masaüstü versiyonu için `yarn electron:serve` komutu
     * Web versiyonu için `yarn serve` komutu
@@ -56,10 +68,14 @@ Masaüstü uygulaması için paketleme işlemi yapıldığında, appimage ve deb
 * **Deb formatlı çıktı:** Pardus Paket Kurucu programıyla ya da alternatif metotlarla kurulum sağlamak için kullanılabilmektedir.
 * **Appimage formatlı çıktı:** kurulum olmaksızın programı çalıştırmak için kullanılabilmektedir.
 
-### Canlı Test
+# Katalizi Nasıl - Nereden Test Edebilirim?
 
 Geliştirilen uygulamaya doğrudan erişim için;
 
 * Masaüstü uygulaması; github üzerinden çeşitli versiyonlarla birlikte indirilmeye sunulmaktadır. https://github.com/emincanozcan/kataliz/releases adresi üzerinden indirilebilir.
 * Web uygulaması; [kataliz.emincanozcan.com](https://kataliz.emincanozcan.com) adresi üzerinden yayınlanmaktadır, bu adres üzerinden incelenebilir.
 * Arka uç ve yönetici paneli; [kataliz-admin.emincanozcan.com](https://kataliz-admin.emincanozcan.com) adresi üzerinden yayınlanmaktadır. İlgili yönetim paneline yetkisiz erişim, bu arka uca bağlanan uygulamalarda istenmeyen etkiler yaratabileceğinden yönetici bilgileri paylaşılmamaktadır. Yönetici erişimi için `emincanozcann@gmail.com` üzerinden iletişime geçilebilir.
+
+# Lisans
+
+Kataliz mağaza servisi, GPL 3 lisansı ile sunulmaktadır.
