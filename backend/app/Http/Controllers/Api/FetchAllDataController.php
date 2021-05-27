@@ -12,11 +12,27 @@ class FetchAllDataController extends Controller
     public function __invoke()
     {
         // caching this all data probably good idea for production usage.
-        $pardusApps = PardusApp::select(['id', 'name', 'image_url', 'scripts'])->get();
+        $pardusApps = PardusApp::select(['id', 'name', 'image_url', 'scripts'])
+            ->whereNotNull('scripts')
+            ->get();
 
-        $nonPardusApps = NonPardusApp::select(['id', 'name', 'image_url'])->with(['pardusApps:id'])->get()->toArray();
+        $nonPardusApps = NonPardusApp::select(['id', 'name', 'image_url'])
+            ->whereHas('pardusApps', function ($q) {
+                $q->whereNotNull('scripts');
+            })
+            ->with(['pardusApps:id'])
+            ->get()
+            ->toArray();
+
         foreach ($nonPardusApps as $k => $v) {
-            $nonPardusApps[$k]['pardus_apps'] = collect($v['pardus_apps'])->pluck('id')->toArray();
+            $alternatives = collect($v['pardus_apps'])->pluck('id')->toArray();
+            foreach ($alternatives as $key => $pardus_app_id) {
+                if ($pardusApps->where('id', $pardus_app_id)->count() < 1) {
+                    unset($alternatives[$key]);
+                }
+            }
+
+            $nonPardusApps[$k]['pardus_apps'] = array_values($alternatives);
         }
 
         $appPackages = AppPackage::select(['id', 'name', 'image_url'])->with('pardusApps:id')->get()->toArray();
@@ -26,7 +42,7 @@ class FetchAllDataController extends Controller
 
         return response([
             'success' => true,
-            'message' => 'Alternative apps are fetched successfully.',
+            'message' => 'Data is fetched successfully.',
             'data' => [
                 'pardus_apps' => $pardusApps,
                 'non_pardus_apps' => $nonPardusApps,

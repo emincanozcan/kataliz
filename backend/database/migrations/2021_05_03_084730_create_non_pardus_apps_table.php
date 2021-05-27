@@ -16,7 +16,7 @@ class CreateNonPardusAppsTable extends Migration
         Schema::create('non_pardus_apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_url');
+            $table->string('image_path');
             $table->timestamps();
         });
     }

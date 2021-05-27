@@ -8,8 +8,9 @@ class PardusAppController extends Controller
 {
     public function index()
     {
-        $pardusApps = PardusApp::all();
-        return view('pardus-apps.list', compact('pardusApps'));
+        return view('pardus-apps.list', [
+            'pardusApps' => PardusApp::paginate(20)
+        ]);
     }
 
     public function create()

@@ -42,5 +42,8 @@
             @endforeach
             </tbody>
         </table>
+        <div class="mt-4">
+            {{ $pardusApps->links() }}
+        </div>
     </div>
 </x-app-layout>

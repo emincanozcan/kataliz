@@ -1,0 +1,3 @@
+[submodule "backend/database/seeders/alternativeto-scraper"]
+	path = backend/database/seeders/alternativeto-scraper
+	url = git@github.com:emincanozcan/alternativeto-scraper.git

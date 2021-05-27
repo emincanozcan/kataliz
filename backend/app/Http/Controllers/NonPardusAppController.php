@@ -10,7 +10,7 @@ class NonPardusAppController extends Controller
     public function index()
     {
         return view('non-pardus-apps.list', [
-            'nonPardusApps' => NonPardusApp::all()
+            'nonPardusApps' => NonPardusApp::paginate(20)
         ]);
     }
 
