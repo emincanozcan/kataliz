@@ -17,7 +17,7 @@
             </div>
             <div class="flex items-center ">
                 <x-jet-label class="w-80 font-medium text-xl">{{ __('Uygulama Görsel URL') }}</x-jet-label>
-                <x-jet-input class="w-full" name="image_url" type="text" value="{{ $pardusApp->image_url }}"></x-jet-input>
+                <x-jet-input class="w-full" name="image_path" type="text" value="{{ $pardusApp->image_path }}"></x-jet-input>
             </div>
             <div class="flex items-start">
                 <x-jet-label class="w-80 font-medium text-xl">{{ __('Yükleme Komutları') }}</x-jet-label>

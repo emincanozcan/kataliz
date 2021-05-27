@@ -16,7 +16,7 @@ class CreatePardusAppsTable extends Migration
         Schema::create('pardus_apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             $table->jsonb('scripts')->nullable();
             $table->timestamps();
         });

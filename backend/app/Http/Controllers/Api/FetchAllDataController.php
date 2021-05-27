@@ -12,11 +12,11 @@ class FetchAllDataController extends Controller
     public function __invoke()
     {
         // caching this all data probably good idea for production usage.
-        $pardusApps = PardusApp::select(['id', 'name', 'image_url', 'scripts'])
+        $pardusApps = PardusApp::select(['id', 'name', 'image_path', 'scripts'])
             ->whereNotNull('scripts')
             ->get();
 
-        $nonPardusApps = NonPardusApp::select(['id', 'name', 'image_url'])
+        $nonPardusApps = NonPardusApp::select(['id', 'name', 'image_path'])
             ->whereHas('pardusApps', function ($q) {
                 $q->whereNotNull('scripts');
             })

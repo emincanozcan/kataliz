@@ -23,7 +23,7 @@ class NonPardusAppController extends Controller
     {
         $validatedData = request()->validate([
             'name' => 'required',
-            'image_url' => 'required',
+            'image_path' => 'required',
         ]);
 
         $nonPardusApp = NonPardusApp::create($validatedData);
@@ -45,7 +45,7 @@ class NonPardusAppController extends Controller
     {
         $validatedData = request()->validate([
             'name' => 'required',
-            'image_url' => 'required',
+            'image_path' => 'required',
         ]);
 
         $nonPardusApp->update($validatedData);

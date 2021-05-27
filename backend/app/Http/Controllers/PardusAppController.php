@@ -22,8 +22,8 @@ class PardusAppController extends Controller
     {
         $validatedData = request()->validate([
             'name' => 'required',
-            'image_url' => 'required',
-            'scripts' => 'required|array'
+            'image_path' => 'required',
+            'scripts' => 'nullable|array'
         ]);
 
         $pardusApp = PardusApp::create($validatedData);
@@ -42,8 +42,8 @@ class PardusAppController extends Controller
     {
         $validatedData = request()->validate([
             'name' => 'required',
-            'image_url' => 'required',
-            'scripts' => 'required|array'
+            'image_path' => 'required',
+            'scripts' => 'nullable|array'
         ]);
 
         $pardusApp->update($validatedData);

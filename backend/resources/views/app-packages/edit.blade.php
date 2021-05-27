@@ -17,8 +17,8 @@
             </div>
             <div class="flex items-center ">
                 <x-app-form-label>{{ __('Paket Görsel URL') }}</x-app-form-label>
-                <x-jet-input class="w-full" name="image_url" type="text"
-                             value="{{ $appPackage->image_url }}"></x-jet-input>
+                <x-jet-input class="w-full" name="image_path" type="text"
+                             value="{{ $appPackage->image_path }}"></x-jet-input>
             </div>
             <div class="flex items-top ">
                 <x-app-form-label>{{ __('Paketteki Uygulamalar') }}</x-app-form-label>
