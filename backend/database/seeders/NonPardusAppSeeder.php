@@ -29,7 +29,7 @@ class NonPardusAppSeeder extends Seeder
         $firefox = PardusApp::whereName('Mozilla Firefox')->firstOrFail();
         $chromium = PardusApp::whereName('Chromium')->firstOrFail();
         $thunderbird = PardusApp::whereName('Mozilla Thunderbird')->firstOrFail();
-        $kdenlive = PardusApp::whereName('KdenLive')->firstOrFail();
+        $kdenlive = PardusApp::whereName('Kdenlive')->firstOrFail();
         $openshot = PardusApp::whereName('OpenShot')->firstOrFail();
         $gimp = PardusApp::whereName('Gimp')->firstOrFail();
         $krita = PardusApp::whereName('Krita')->firstOrFail();

@@ -18,7 +18,7 @@ class AppPackageSeeder extends Seeder
         $libreOffice = PardusApp::whereName('Libre Office')->firstOrFail();
         $gedit = PardusApp::whereName('Gedit')->firstOrFail();
         $thunderbird = PardusApp::whereName('Mozilla Thunderbird')->firstOrFail();
-        $kdenlive = PardusApp::whereName('KdenLive')->firstOrFail();
+        $kdenlive = PardusApp::whereName('Kdenlive')->firstOrFail();
         $openshot = PardusApp::whereName('OpenShot')->firstOrFail();
         $vscode = PardusApp::whereName('Visual Studio Code (VS CODE)')->firstOrFail();
         $python = PardusApp::whereName('Python')->firstOrFail();
