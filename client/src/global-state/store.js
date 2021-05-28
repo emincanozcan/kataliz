@@ -10,8 +10,8 @@ const bucket = ref([]);
 async function fetchData() {
   try {
     const response = await axios.get(
-      // "https://kataliz-admin.emincanozcan.com/api/get-all-data"
-      "http://localhost/api/get-all-data"
+      "https://kataliz-admin.emincanozcan.com/api/get-all-data"
+      // "http://localhost/api/get-all-data"
     );
     const data = response.data.data;
     pardusApps.value = data["pardus_apps"];
