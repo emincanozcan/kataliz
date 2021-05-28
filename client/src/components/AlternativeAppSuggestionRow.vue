@@ -19,7 +19,8 @@
         <img
           class="w-10 h-10 mr-4 rounded-full"
           :src="pardusApp.image_url"
-          alt=""
+          :alt="pardusApp.name"
+          loading="lazy"
         />
         <span class="font-medium mr-4"> {{ pardusApp.name }}</span>
         <button

@@ -23,7 +23,6 @@ echo "Kurulum öncesi hazırlıklar tamamlandı. Yüklemeler başlatılıyor."
       "# ------------ #",
       `echo '${leading} ${name} adlı program yükleniyor, lütfen bekleyiniz.'`,
       appScripts,
-      'sudo find /etc/apt/sources.list.d/ -name "*.save" -type f -delete',
       `echo '${leading} ${name} adlı programın yüklemesi tamamlandı.'`,
     ].join("\n");
   });

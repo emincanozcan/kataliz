@@ -35,7 +35,12 @@ class FetchAllDataController extends Controller
             $nonPardusApps[$k]['pardus_apps'] = array_values($alternatives);
         }
 
-        $appPackages = AppPackage::select(['id', 'name', 'image_url'])->with('pardusApps:id')->get()->toArray();
+        $pardusApps = $pardusApps->toArray();
+        foreach ($pardusApps as $key => $value) {
+            unset($pardusApps[$key]['image_path']);
+        }
+
+        $appPackages = AppPackage::select(['id', 'name', 'image_path'])->with('pardusApps:id')->get()->toArray();
         foreach ($appPackages as $k => $v) {
             $appPackages[$k]['pardus_apps'] = collect($v['pardus_apps'])->pluck('id')->toArray();
         }

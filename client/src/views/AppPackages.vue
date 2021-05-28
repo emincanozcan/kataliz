@@ -44,6 +44,7 @@
         <div class="mb-4 flex items-center justify-start">
           <img
             class="object-contain h-12 w-12 mr-4 rounded-full"
+            loading="lazy"
             :src="pkg.image_url"
           />
           <h3 class="font-semibold text-gray-100 text-xl flex-1">
@@ -59,6 +60,7 @@
             <div class="flex items-center mr-2">
               <img
                 :src="app.image_url"
+                loading="lazy"
                 class="w-10 h-10 mr-4 rounded-full"
                 alt=""
               />

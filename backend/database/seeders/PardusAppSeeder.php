@@ -59,7 +59,7 @@ class PardusAppSeeder extends Seeder
 //        $this->$this->ondokuzon('Python', 'python3');
         $this->ondokuzon('Dropbox', 'dropbox');
         $this->ondokuzon('TeamViewer', 'teamviewer');
-        $this->ondokuzon('VirtualBox', 'virtualbox');
+        $this->ondokuzon('VirtualBox', 'virtualbox6.1');
         $this->ondokuzon('Sublime Text', 'sublime-text');
         $this->ondokuzon('FileZilla', 'filezilla');
         $this->ondokuzon('Opera', 'opera-stable');
@@ -76,13 +76,12 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Vivaldi', 'vivaldi-stable');
         $this->ondokuzon('GParted', 'gparted');
         $this->ondokuzon('ownCloud', 'owncloud-client');
-        $this->ondokuzon('Wireshark', 'wireshark');
+//        $this->ondokuzon('Wireshark', 'wireshark');  # it broke process because of questions..
         $this->ondokuzon('Slack', 'slack-desktop');
         $this->ondokuzon('Nextcloud', 'nextcloud-desktop');
         $this->ondokuzon('Apache NetBeans', 'netbeans');
         $this->ondokuzon('Clementine', 'clementine');
         $this->ondokuzon('Deluge', 'deluge');
-        $this->ondokuzon('OpenVPN', 'deluge');
         $this->ondokuzon('Launchy', 'launchy');
         $this->ondokuzon('Tor Browser', 'torbrowser-launcher');
         $this->ondokuzon('Wine', 'wine');
@@ -97,7 +96,6 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Zim', 'zim');
         $this->ondokuzon('Mumble', 'mumble');
         $this->ondokuzon('Dia', 'dia');
-        $this->ondokuzon('Clonezilla', 'clonezilla');
         $this->ondokuzon('Rhythmbox', 'rhythmbox');
         $this->ondokuzon('SMPlayer', 'smplayer');
         $this->ondokuzon('Wget', 'wget');
@@ -109,10 +107,8 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('GnuCash', 'gnucash');
         $this->ondokuzon('MusicBrainz Picard', 'picard');
         $this->ondokuzon('Scribus', 'scribus');
-        $this->ondokuzon('MPlayer', 'mplayer');
-        $this->ondokuzon('MyPaint', 'mypaint');
         $this->ondokuzon('TestDisk', 'testdisk');
-        $this->ondokuzon('Tiny Tiny RSS', 'tt-rss');
+//        $this->ondokuzon('Tiny Tiny RSS', 'tt-rss');  # it broke process because of questions..
         $this->ondokuzon('AnyDesk', 'anydesk');
         $this->ondokuzon('Viber', 'viber');
         $this->ondokuzon('Stellarium', 'stellarium');
@@ -122,7 +118,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Brasero', 'brasero');
         $this->ondokuzon('KeePassXC', 'keepassxc');
         $this->ondokuzon('digiKam', 'digikam');
-        $this->ondokuzon('Nmap', 'npat');
+        $this->ondokuzon('Nmap', 'nmap');
         $this->ondokuzon('SpeedCrunch', 'speedcrunch');
         $this->ondokuzon('Code::Blocks', 'codeblocks');
         $this->ondokuzon('Audacious', 'audacious');
@@ -141,11 +137,10 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('FocusWriter', 'focuswriter');
         $this->ondokuzon('GoldenDict', 'goldendict');
         $this->ondokuzon('PDFsam', 'pdfsam');
-        $this->ondokuzon('Ardour', 'ardour');
+//        $this->ondokuzon('Ardour', 'ardour'); # it broke process because of questions..
         $this->ondokuzon('MuseScore', 'musescore');
-        $this->ondokuzon('MKVToolnix', 'mkvtoolnix');
+        $this->ondokuzon('MKVToolnix', 'mkvtoolnix-gui');
         $this->ondokuzon('I2P', 'i2p');
-        $this->ondokuzon('searx', 'searx');
         $this->ondokuzon('LyX', 'lyx');
         $this->ondokuzon('Workrave', 'workrave');
         $this->ondokuzon('Remmina', 'remmina');
