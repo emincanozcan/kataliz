@@ -3,20 +3,33 @@
 namespace Database\Seeders;
 
 use App\Models\PardusApp;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Seeder;
 
 class PardusAppSeeder extends Seeder
 {
     protected function setScript(string $name, array $scripts)
     {
-        PardusApp::where('name', $name)->firstOrFail()->update([
-            'scripts' => $scripts
-        ]);
+        try {
+            PardusApp::where('name', $name)->firstOrFail()->update([
+                'scripts' => $scripts
+            ]);
+        } catch (ModelNotFoundException $model) {
+            dd("Record not found for: " . $name);
+        }
     }
 
     protected function ondokuzon($name, $packageName)
     {
         $this->setScript($name, ['sudo apt-get install ' . $packageName . ' -y']);
+    }
+
+    protected function snap($name, $packageName)
+    {
+        $this->setScript($name, [
+            'sudo apt install snapd -y',
+            'sudo snap install ' . $packageName . ' --classic'
+        ]);
     }
 
     public function run()
@@ -43,6 +56,36 @@ class PardusAppSeeder extends Seeder
             'sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose',
             'sudo chmod +x /usr/local/bin/docker-compose',
         ]);
+        $this->setScript('Vagrant', [
+            'wget -O vagrant.deb https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb',
+            'sudo apt install ./vagrant.deb',
+            'rm -f vagrant.deb'
+        ]);
+        $this->setScript('ParseHub', [
+            'apt install curl -y',
+            'curl -L https://parsehub.com/static/client/parsehub.tar.gz | tar -xzf - -C /tmp',
+            'sudo mv /tmp/parsehub /opt/',
+            'sudo ln -s /opt/parsehub/parsehub /usr/local/bin/',
+            'rm -f parsehub.tar.gz'
+        ]);
+        $this->setScript('WebStorm', [
+            'wget -O webstorm.tar.gz https://download.jetbrains.com/webstorm/WebStorm-2021.1.1.tar.gz',
+            'sudo tar -zxvf webstorm.tar.gz -C /opt',
+            'sudo -f webstorm.tar.gz'
+        ]);
+        $this->setScript('Insomnia REST Client', [
+            "wget -O insomnia.deb https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website",
+            "sudo apt install ./insomnia.deb",
+            "rm -f insomnia.deb"
+        ]);
+
+        $this->setScript('DBeaver', [
+            "wget -O - https://dbeaver.io/debs/dbeaver.gpg.key | sudo apt-key add -",
+            'echo "deb https://dbeaver.io/debs/dbeaver-ce /" | sudo tee /etc/apt/sources.list.d/dbeaver.list',
+            "sudo apt update",
+            "sudo apt -y install dbeaver-ce",
+        ]);
+
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
 
         $this->ondokuzon('Spotify', 'spotify-client');
@@ -185,6 +228,21 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Go (Programming Language)', 'perl');
         $this->ondokuzon('Ruby', 'ruby-full');
         $this->ondokuzon('Rust', 'rustc');
+
+        $this->ondokuzon('Flameshot', 'flameshot');
+        $this->ondokuzon('Ferdi', 'ferdi');
+        $this->ondokuzon('Olive Video Editor', 'olive-editor');
+        $this->ondokuzon('Kazam', 'kazam');
+        $this->ondokuzon('Arduino IDE', 'arduino');
+        $this->ondokuzon('Geary', 'geary');
+        $this->ondokuzon('PiTiVi', 'pitivi');
+        $this->ondokuzon('Spyder', 'spyder3');
+
+        $this->snap('WebStorm', 'webstorm');
+        $this->snap('PhpStorm', 'phpstorm');
+        $this->snap('DataGrip', 'datagrip');
+        $this->snap('IntelliJ IDEA', 'intellij-idea-ultimate');
+
 //        [ "C++", "C (programming language)", "C#","PHP", "Go (Programming Language)",  ]
     }
 }

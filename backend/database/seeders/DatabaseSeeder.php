@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
             $data = json_decode(file_get_contents(base_path('database/seeders/alternativeto-scraper/app-data/' . $filename)));
 
-            if ($data->likes < 55) {
+            if ($data->likes < 51) {
                 continue;
             }
 
@@ -57,8 +57,6 @@ class DatabaseSeeder extends Seeder
                     ['image_path' => $this->getImagePath($data->img)]
                 );
                 $nonPardusApp->pardusApps()->attach($pardusApp->id);
-
-                $this->generateAlternatives($nonPardusApp, $data->alternativeIds);
             }
 
         }
