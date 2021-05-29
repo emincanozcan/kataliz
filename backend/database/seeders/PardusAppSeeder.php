@@ -28,6 +28,13 @@ class PardusAppSeeder extends Seeder
             "sudo rm -f gitkraken-amd64.deb",
         ]);
 
+        $this->setScript('Signal', [
+            "wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg",
+            "cat signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null",
+            "echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list",
+            "sudo apt update && sudo apt install signal-desktop"
+        ]);
+
         $this->setScript('Docker', [
             'sudo apt install docker.io -y',
             'sudo systemctl start docker',
@@ -38,9 +45,9 @@ class PardusAppSeeder extends Seeder
         ]);
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
 
-        $this->ondokuzon('Spotify','spotify-client');
-        $this->ondokuzon('Audacity','audacity');
-        $this->ondokuzon('VLC Media Player','vlc');
+        $this->ondokuzon('Spotify', 'spotify-client');
+        $this->ondokuzon('Audacity', 'audacity');
+        $this->ondokuzon('VLC Media Player', 'vlc');
         $this->ondokuzon('GIMP', 'gimp');
         $this->ondokuzon('Krita', 'krita');
         $this->ondokuzon('Okular', 'okular');
@@ -63,6 +70,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Sublime Text', 'sublime-text');
         $this->ondokuzon('FileZilla', 'filezilla');
         $this->ondokuzon('Opera', 'opera-stable');
+        $this->ondokuzon('Git', 'git');
         $this->ondokuzon('HandBrake', 'handbrake');
         $this->ondokuzon('Pidgin', 'pidgin');
         $this->ondokuzon('KeePass', 'keepass2');
@@ -156,5 +164,27 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Bluefish Editor', 'bluefish');
         $this->ondokuzon('Liferea', 'liferea');
         $this->ondokuzon('Falkon', 'falkon');
+        $this->ondokuzon('KDE Connect', 'kdeconnect');
+        $this->ondokuzon('SageMath', 'sagemath');
+        $this->ondokuzon('Task Coach', 'taskcoach');
+        $this->ondokuzon('Mixxx', 'mixxx');
+        $this->ondokuzon('SimpleScreenRecorder', 'simplescreenrecorder');
+        $this->ondokuzon('Thunar', 'thunar');
+        $this->ondokuzon('GeoGebra', 'geogebra');
+        $this->ondokuzon('Franz', 'franz');
+        $this->ondokuzon('Skype', 'skypeforlinux');
+        $this->ondokuzon('OBS Studio', 'obs-studio');
+
+        $this->ondokuzon('Node.js', 'nodejs');
+        $this->ondokuzon('Java', 'default-jdk');
+        $this->ondokuzon('Scala', 'scala');
+        $this->ondokuzon('Python', 'python3');
+        $this->ondokuzon('Lua', 'lua5.3');
+        $this->ondokuzon('R (programming language)', 'r-base');
+        $this->ondokuzon('Perl', 'perl');
+        $this->ondokuzon('Go (Programming Language)', 'perl');
+        $this->ondokuzon('Ruby', 'ruby-full');
+        $this->ondokuzon('Rust', 'rustc');
+//        [ "C++", "C (programming language)", "C#","PHP", "Go (Programming Language)",  ]
     }
 }

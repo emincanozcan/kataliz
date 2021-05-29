@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
             $data = json_decode(file_get_contents(base_path('database/seeders/alternativeto-scraper/app-data/' . $filename)));
 
-            if ($data->likes < 70) {
+            if ($data->likes < 55) {
                 continue;
             }
 
