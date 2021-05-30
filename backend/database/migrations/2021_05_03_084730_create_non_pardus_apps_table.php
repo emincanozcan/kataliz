@@ -17,6 +17,7 @@ class CreateNonPardusAppsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image_path')->nullable();
+            $table->unsignedInteger('alternativeto_likes')->default(0);
             $table->timestamps();
         });
     }

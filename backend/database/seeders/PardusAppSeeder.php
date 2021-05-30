@@ -15,7 +15,7 @@ class PardusAppSeeder extends Seeder
                 'scripts' => $scripts
             ]);
         } catch (ModelNotFoundException $model) {
-            dd("Record not found for: " . $name);
+            echo "Record not found for: " . $name;
         }
     }
 
@@ -32,20 +32,27 @@ class PardusAppSeeder extends Seeder
         ]);
     }
 
+    protected function wgetDeb(string $name, string $fileName, string $wgetUrl, array $preInstallCommands = [])
+    {
+        $this->setScript($name, array_merge($preInstallCommands, [
+            'wget -O ' . $fileName . ' ' . $wgetUrl,
+            'sudo apt install ./' . $fileName . ' -y',
+            'rm -f ' . $fileName
+        ]));
+    }
+
+    protected function makeInstallationSame($mainName, $otherName)
+    {
+        $this->setScript($otherName, PardusApp::where('name', $mainName)->firstOrFail()->scripts);
+    }
+
     public function run()
     {
-
-        $this->setScript('GitKraken', [
-            "sudo wget https://release.gitkraken.com/linux/gitkraken-amd64.deb",
-            "sudo dpkg -i gitkraken-amd64.deb",
-            "sudo rm -f gitkraken-amd64.deb",
-        ]);
-
         $this->setScript('Signal', [
             "wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg",
             "cat signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null",
             "echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list",
-            "sudo apt update && sudo apt install signal-desktop"
+            "sudo apt update && sudo apt install signal-desktop -y"
         ]);
 
         $this->setScript('Docker', [
@@ -56,27 +63,12 @@ class PardusAppSeeder extends Seeder
             'sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose',
             'sudo chmod +x /usr/local/bin/docker-compose',
         ]);
-        $this->setScript('Vagrant', [
-            'wget -O vagrant.deb https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb',
-            'sudo apt install ./vagrant.deb',
-            'rm -f vagrant.deb'
-        ]);
         $this->setScript('ParseHub', [
             'apt install curl -y',
             'curl -L https://parsehub.com/static/client/parsehub.tar.gz | tar -xzf - -C /tmp',
             'sudo mv /tmp/parsehub /opt/',
             'sudo ln -s /opt/parsehub/parsehub /usr/local/bin/',
             'rm -f parsehub.tar.gz'
-        ]);
-        $this->setScript('WebStorm', [
-            'wget -O webstorm.tar.gz https://download.jetbrains.com/webstorm/WebStorm-2021.1.1.tar.gz',
-            'sudo tar -zxvf webstorm.tar.gz -C /opt',
-            'sudo -f webstorm.tar.gz'
-        ]);
-        $this->setScript('Insomnia REST Client', [
-            "wget -O insomnia.deb https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website",
-            "sudo apt install ./insomnia.deb",
-            "rm -f insomnia.deb"
         ]);
 
         $this->setScript('DBeaver', [
@@ -87,6 +79,19 @@ class PardusAppSeeder extends Seeder
         ]);
 
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
+
+        $this->wgetDeb('Vagrant', 'vagrant.deb', 'https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb');
+        $this->wgetDeb('Angry IP Scanner', 'angryip.deb', 'https://github.com/angryip/ipscan/releases/download/3.7.6/ipscan_3.7.6_amd64.deb');
+        $this->wgetDeb('Insomnia REST Client', 'insomnia.deb', 'https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website');
+        $this->wgetDeb('Google Chrome', 'chrome.deb', 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb');
+        $this->wgetDeb('GitKraken', 'gitkraken.deb', 'https://release.gitkraken.com/linux/gitkraken-amd64.deb');
+        $this->wgetDeb('SmartGit', 'smartgit.deb', 'https://www.syntevo.com/downloads/smartgit/smartgit-20_2_5.deb');
+        $this->wgetDeb('Steam', 'steam.deb', 'https://media.steampowered.com/client/installer/steam.deb', [
+            "sudo dpkg --add-architecture i386",
+            'sudo apt update',
+            "sudo apt install libgl1-mesa-glx:i386 -y",
+        ]);
+
 
         $this->ondokuzon('Spotify', 'spotify-client');
         $this->ondokuzon('Audacity', 'audacity');
@@ -101,6 +106,9 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Discord', 'discord');
         $this->ondokuzon('Visual Studio Code', 'code');
         $this->ondokuzon('LibreOffice', 'libreoffice');
+        foreach (["LibreOffice - Writer", "LibreOffice - Calc", "LibreOffice - Draw", "LibreOffice - Impress", "LibreOffice - Base", "LibreOffice - Math",] as $childOfLibre) {
+            $this->makeInstallationSame('LibreOffice', $childOfLibre);
+        }
         $this->ondokuzon('gedit', 'gedit');
         $this->ondokuzon('Chromium', 'chromium');
         $this->ondokuzon('Thunderbird', 'thunderbird');
@@ -202,7 +210,6 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('uGet', 'uget');
         $this->ondokuzon('Compiz', 'compiz');
         $this->ondokuzon('Synaptic', 'synaptic');
-        $this->ondokuzon('Terminator', 'terminator');
         $this->ondokuzon('Conky', 'conky');
         $this->ondokuzon('Bluefish Editor', 'bluefish');
         $this->ondokuzon('Liferea', 'liferea');
@@ -237,7 +244,10 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Geary', 'geary');
         $this->ondokuzon('PiTiVi', 'pitivi');
         $this->ondokuzon('Spyder', 'spyder3');
+        $this->ondokuzon('PyCharm', 'pycharm');
 
+        $this->snap('Shotcut', 'shotcut');
+        $this->snap('Typora', 'typora');
         $this->snap('WebStorm', 'webstorm');
         $this->snap('PhpStorm', 'phpstorm');
         $this->snap('DataGrip', 'datagrip');

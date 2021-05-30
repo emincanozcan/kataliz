@@ -38,25 +38,15 @@ class DatabaseSeeder extends Seeder
             }
 
             if ($data->linux === false) {
-                $nonPardusApp = NonPardusApp::firstOrCreate(
-                    ['name' => $data->name],
-                    ['image_path' => $this->getImagePath($data->img)]
-                );
+                $nonPardusApp = $this->firstOrCreateNonPardusApp($data);
                 $this->generateAlternatives($nonPardusApp, $data->alternativeIds);
                 continue;
             }
 
-            $pardusApp = PardusApp::firstOrCreate(
-                ['name' => $data->name,],
-                ['image_path' => $this->getImagePath($data->img)]
-            );
+            $pardusApp = $this->firstOrCreatePardusApp($data);
 
             if ($data->mac === true || $data->windows === true) {
-                $nonPardusApp = NonPardusApp::firstOrCreate(
-                    ['name' => $data->name],
-                    ['image_path' => $this->getImagePath($data->img)]
-                );
-                $nonPardusApp->pardusApps()->attach($pardusApp->id);
+                $this->firstOrCreateNonPardusApp($data)->pardusApps()->attach($pardusApp->id);
             }
 
         }
@@ -73,11 +63,24 @@ class DatabaseSeeder extends Seeder
                 continue;
             }
 
-            $pardusApp = PardusApp::firstOrCreate(
-                ['name' => $alternativeAppData->name,],
-                ['image_path' => $this->getImagePath($alternativeAppData->img)]
-            );
+            $pardusApp = $this->firstOrCreatePardusApp($alternativeAppData);
             $nonPardusApp->pardusApps()->attach($pardusApp->id);
         }
+    }
+
+    protected function firstOrCreatePardusApp($data)
+    {
+        return PardusApp::firstOrCreate(
+            ['name' => $data->name, 'alternativeto_likes' => $data->likes],
+            ['image_path' => $this->getImagePath($data->img)]
+        );
+    }
+
+    protected function firstOrCreateNonPardusApp($data)
+    {
+        return NonPardusApp::firstOrCreate(
+            ['name' => $data->name, 'alternativeto_likes' => $data->likes],
+            ['image_path' => $this->getImagePath($data->img)]
+        );
     }
 }
