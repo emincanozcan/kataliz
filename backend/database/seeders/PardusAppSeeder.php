@@ -21,7 +21,7 @@ class PardusAppSeeder extends Seeder
 
     protected function ondokuzon($name, $packageName)
     {
-        $this->setScript($name, ['sudo apt-get install ' . $packageName . ' -y']);
+        $this->setScript($name, ['sudo DEBIAN_FRONTEND=noninteractive apt-get install ' . $packageName . ' -y']);
     }
 
     protected function snap($name, $packageName)
@@ -78,6 +78,14 @@ class PardusAppSeeder extends Seeder
             "sudo apt -y install dbeaver-ce",
         ]);
 
+        $this->setScript('Element', [
+            "sudo apt install -y wget apt-transport-https",
+            'sudo wget -O /usr/share/keyrings/riot-im-archive-keyring.gpg https://packages.riot.im/debian/riot-im-archive-keyring.gpg',
+            'echo "deb [signed-by=/usr/share/keyrings/riot-im-archive-keyring.gpg] https://packages.riot.im/debian/ default main" | sudo tee /etc/apt/sources.list.d/riot-im.list',
+            "sudo apt update",
+            "sudo apt install element-desktop",
+        ]);
+
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
 
         $this->wgetDeb('Vagrant', 'vagrant.deb', 'https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb');
@@ -86,6 +94,10 @@ class PardusAppSeeder extends Seeder
         $this->wgetDeb('Google Chrome', 'chrome.deb', 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb');
         $this->wgetDeb('GitKraken', 'gitkraken.deb', 'https://release.gitkraken.com/linux/gitkraken-amd64.deb');
         $this->wgetDeb('SmartGit', 'smartgit.deb', 'https://www.syntevo.com/downloads/smartgit/smartgit-20_2_5.deb');
+        $this->wgetDeb('4k Video Downloader', '4kvideodownloader.deb', 'https://dl.4kdownload.com/app/4kvideodownloader_4.16.0-1_amd64.deb');
+        $this->wgetDeb('Tixati', 'tixati.deb', 'https://download2.tixati.com/download/tixati_2.83-1_amd64.deb');
+        $this->wgetDeb('Trillian', 'trillian.deb', 'https://www.trillian.im/get/linux/6.3/?deb=64');
+        $this->wgetDeb('1Password', '1password.deb', 'https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb');
         $this->wgetDeb('Steam', 'steam.deb', 'https://media.steampowered.com/client/installer/steam.deb', [
             "sudo dpkg --add-architecture i386",
             'sudo apt update',
@@ -135,7 +147,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Vivaldi', 'vivaldi-stable');
         $this->ondokuzon('GParted', 'gparted');
         $this->ondokuzon('ownCloud', 'owncloud-client');
-//        $this->ondokuzon('Wireshark', 'wireshark');  # it broke process because of questions..
+        $this->ondokuzon('Wireshark', 'wireshark');
         $this->ondokuzon('Slack', 'slack-desktop');
         $this->ondokuzon('Nextcloud', 'nextcloud-desktop');
         $this->ondokuzon('Apache NetBeans', 'netbeans');
@@ -143,6 +155,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('Deluge', 'deluge');
         $this->ondokuzon('Launchy', 'launchy');
         $this->ondokuzon('Tor Browser', 'torbrowser-launcher');
+        $this->makeInstallationSame('Tor Browser', 'Tor');
         $this->ondokuzon('Wine', 'wine');
         $this->ondokuzon('FLAC', 'flac');
         $this->ondokuzon('Brave', 'brave-browser');
@@ -167,7 +180,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('MusicBrainz Picard', 'picard');
         $this->ondokuzon('Scribus', 'scribus');
         $this->ondokuzon('TestDisk', 'testdisk');
-//        $this->ondokuzon('Tiny Tiny RSS', 'tt-rss');  # it broke process because of questions..
+//        $this->ondokuzon('Tiny Tiny RSS', 'tt-rss');
         $this->ondokuzon('AnyDesk', 'anydesk');
         $this->ondokuzon('Viber', 'viber');
         $this->ondokuzon('Stellarium', 'stellarium');
@@ -196,7 +209,7 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('FocusWriter', 'focuswriter');
         $this->ondokuzon('GoldenDict', 'goldendict');
         $this->ondokuzon('PDFsam', 'pdfsam');
-//        $this->ondokuzon('Ardour', 'ardour'); # it broke process because of questions..
+        $this->ondokuzon('Ardour', 'ardour');
         $this->ondokuzon('MuseScore', 'musescore');
         $this->ondokuzon('MKVToolnix', 'mkvtoolnix-gui');
         $this->ondokuzon('I2P', 'i2p');
@@ -245,6 +258,11 @@ class PardusAppSeeder extends Seeder
         $this->ondokuzon('PiTiVi', 'pitivi');
         $this->ondokuzon('Spyder', 'spyder3');
         $this->ondokuzon('PyCharm', 'pycharm');
+        $this->ondokuzon('AbiWord', 'abiword');
+        $this->ondokuzon('CherryTree', 'cherrytree');
+        $this->ondokuzon('TaskWarrior', 'taskwarrior');
+        $this->ondokuzon('Taskade', 'taskade');
+        $this->ondokuzon('LMMS', 'lmms');
 
         $this->snap('Shotcut', 'shotcut');
         $this->snap('Typora', 'typora');
@@ -252,6 +270,9 @@ class PardusAppSeeder extends Seeder
         $this->snap('PhpStorm', 'phpstorm');
         $this->snap('DataGrip', 'datagrip');
         $this->snap('IntelliJ IDEA', 'intellij-idea-ultimate');
+        $this->snap('Eclipse', 'eclipse');
+        $this->snap('scrcpy', 'scrcpy');
+        $this->snap('Simplenote', 'simplenote');
 
 //        [ "C++", "C (programming language)", "C#","PHP", "Go (Programming Language)",  ]
     }
