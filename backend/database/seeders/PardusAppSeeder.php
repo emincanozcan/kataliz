@@ -37,7 +37,7 @@ class PardusAppSeeder extends Seeder
 [Desktop Entry]
 Type=Application
 Name=$name
-Exec=$appImagePath
+Exec=$appImagePath --no-sandbox
 EOF
 echo 'Tee ok.'",
             "sudo chmod +x $desktopPath",
@@ -128,9 +128,17 @@ echo 'Tee ok.'",
             "sudo apt install element-desktop",
         ]);
 
+        $this->setScript('Zotero', [
+            "sudo wget -qO- https://github.com/retorquere/zotero-deb/releases/download/apt-get/install.sh | sudo bash",
+            'sudo apt update',
+            'sudo apt install zotero',
+        ]);
+
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
 
         $this->appImage('Cryptomator', "https://github.com/cryptomator/cryptomator/releases/download/1.5.15/cryptomator-1.5.15-x86_64.AppImage");
+        $this->appImage('Joplin', "https://github.com/laurent22/joplin/releases/download/v1.8.5/Joplin-1.8.5.AppImage");
+
         $this->wgetDeb('Vagrant', 'https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb');
         $this->wgetDeb('Angry IP Scanner', 'https://github.com/angryip/ipscan/releases/download/3.7.6/ipscan_3.7.6_amd64.deb');
         $this->wgetDeb('Insomnia REST Client', 'https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website');
@@ -149,6 +157,8 @@ echo 'Tee ok.'",
         $this->wgetDeb('WPS Office', 'https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/10161/wps-office_11.1.0.10161.XA_amd64.deb');
         $this->wgetDeb('Mattermost', 'https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-amd64.deb');
         $this->wgetDeb('ManicTime', 'https://cdn.manictime.com/setup/linux/v1_3_5_0/ManicTime.deb');
+        $this->wgetDeb('balenaEtcher', 'https://github.com/balena-io/etcher/releases/download/v1.5.120/balena-etcher-electron_1.5.120_amd64.deb');
+        $this->wgetDeb('Obsidian', 'https://github.com/obsidianmd/obsidian-releases/releases/download/v0.9.20/obsidian_0.9.20_amd64.deb');
         $this->makeInstallationSame('WPS Office', 'WPS Writer');
         $this->wgetDeb('Steam', 'https://media.steampowered.com/client/installer/steam.deb', [
             "sudo dpkg --add-architecture i386",
@@ -315,6 +325,7 @@ echo 'Tee ok.'",
         $this->ondokuzon('TaskWarrior', 'taskwarrior');
         $this->ondokuzon('Taskade', 'taskade');
         $this->ondokuzon('LMMS', 'lmms');
+        $this->ondokuzon('htop', 'htop');
 
         $this->snap('Shotcut', 'shotcut');
         $this->snap('Typora', 'typora');
@@ -327,6 +338,7 @@ echo 'Tee ok.'",
         $this->snap('Simplenote', 'simplenote');
         $this->snap('Standard Notes', 'standard-notes');
         $this->snap('ONLYOFFICE', 'onlyoffice-desktopeditors');
+        $this->snap('RetroArch', 'retroarch');
 
 //        [ "C++", "C (programming language)", "C#","PHP", "Go (Programming Language)",  ]
     }
