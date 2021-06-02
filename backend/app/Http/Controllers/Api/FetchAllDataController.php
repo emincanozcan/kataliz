@@ -15,6 +15,7 @@ class FetchAllDataController extends Controller
         $data = Cache::remember('api-all-data', 60 * 5, function () {
             $pardusApps = PardusApp::select(['id', 'name', 'image_path', 'scripts'])
                 ->whereNotNull('scripts')
+                ->orderByDesc('alternativeto_likes')
                 ->get();
 
             $nonPardusApps = NonPardusApp::select(['id', 'name', 'image_path'])
@@ -22,6 +23,7 @@ class FetchAllDataController extends Controller
                     $q->whereNotNull('scripts');
                 })
                 ->with(['pardusApps:id'])
+                ->orderByDesc('alternativeto_likes')
                 ->get()
                 ->toArray();
 

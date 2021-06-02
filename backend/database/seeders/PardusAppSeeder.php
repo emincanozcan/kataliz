@@ -19,6 +19,32 @@ class PardusAppSeeder extends Seeder
         }
     }
 
+    private function appImage($name, $downloadUrl)
+    {
+        $userName = '$(logname)';
+        $appImagesFolder = '/home/' . $userName . '/kataliz-appimages';
+        $appImagePath = $appImagesFolder . '/' . $name . '.AppImage';
+
+        $desktopPath = '/usr/share/applications/' . $name . '.desktop';
+
+        $this->setScript($name, [
+            "sudo mkdir -p $appImagesFolder",
+            "sudo wget -O $appImagePath $downloadUrl",
+            "sudo chown $userName:$userName $appImagePath",
+            "sudo chmod +x $appImagePath",
+            "sudo tee $desktopPath <<EOF
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Name=$name
+Exec=$appImagePath
+EOF
+echo 'Tee ok.'",
+            "sudo chmod +x $desktopPath",
+            "sudo chown $userName:$userName $desktopPath",
+        ]);
+    }
+
     protected function ondokuzon($name, $packageName)
     {
         $this->setScript($name, ['sudo DEBIAN_FRONTEND=noninteractive apt-get install ' . $packageName . ' -y']);
@@ -32,8 +58,9 @@ class PardusAppSeeder extends Seeder
         ]);
     }
 
-    protected function wgetDeb(string $name, string $fileName, string $wgetUrl, array $preInstallCommands = [])
+    protected function wgetDeb(string $name, string $wgetUrl, array $preInstallCommands = [])
     {
+        $fileName = md5($name) . '.deb';
         $this->setScript($name, array_merge($preInstallCommands, [
             'wget -O ' . $fileName . ' ' . $wgetUrl,
             'sudo apt install ./' . $fileName . ' -y',
@@ -64,11 +91,26 @@ class PardusAppSeeder extends Seeder
             'sudo chmod +x /usr/local/bin/docker-compose',
         ]);
         $this->setScript('ParseHub', [
-            'apt install curl -y',
+            'sudo apt install curl -y',
             'curl -L https://parsehub.com/static/client/parsehub.tar.gz | tar -xzf - -C /tmp',
             'sudo mv /tmp/parsehub /opt/',
             'sudo ln -s /opt/parsehub/parsehub /usr/local/bin/',
             'rm -f parsehub.tar.gz'
+        ]);
+
+        $this->setScript('Celestia', [
+            'sudo apt install curl -y',
+            'curl https://celestia.space/packages/celestia.key | sudo apt-key add -',
+            'echo deb https://celestia.space/packages buster main | sudo tee /etc/apt/sources.list.d/celestia.list',
+            'sudo apt install celestia -y',
+        ]);
+
+        $this->setScript('Pale Moon', [
+            'sudo apt install curl -y',
+            "echo 'deb http://download.opensuse.org/repositories/home:/stevenpusser/Debian_9.0/ /' | sudo tee /etc/apt/sources.list.d/home:stevenpusser.list",
+            'curl -fsSL https://download.opensuse.org/repositories/home:stevenpusser/Debian_9.0/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_stevenpusser.gpg > /dev/null',
+            'sudo apt update',
+            'sudo apt install palemoon'
         ]);
 
         $this->setScript('DBeaver', [
@@ -88,17 +130,27 @@ class PardusAppSeeder extends Seeder
 
         $this->setScript('Mozilla Firefox', ['( sudo apt install firefox-esr -y || sudo apt install firefox -y)']);
 
-        $this->wgetDeb('Vagrant', 'vagrant.deb', 'https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb');
-        $this->wgetDeb('Angry IP Scanner', 'angryip.deb', 'https://github.com/angryip/ipscan/releases/download/3.7.6/ipscan_3.7.6_amd64.deb');
-        $this->wgetDeb('Insomnia REST Client', 'insomnia.deb', 'https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website');
-        $this->wgetDeb('Google Chrome', 'chrome.deb', 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb');
-        $this->wgetDeb('GitKraken', 'gitkraken.deb', 'https://release.gitkraken.com/linux/gitkraken-amd64.deb');
-        $this->wgetDeb('SmartGit', 'smartgit.deb', 'https://www.syntevo.com/downloads/smartgit/smartgit-20_2_5.deb');
-        $this->wgetDeb('4k Video Downloader', '4kvideodownloader.deb', 'https://dl.4kdownload.com/app/4kvideodownloader_4.16.0-1_amd64.deb');
-        $this->wgetDeb('Tixati', 'tixati.deb', 'https://download2.tixati.com/download/tixati_2.83-1_amd64.deb');
-        $this->wgetDeb('Trillian', 'trillian.deb', 'https://www.trillian.im/get/linux/6.3/?deb=64');
-        $this->wgetDeb('1Password', '1password.deb', 'https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb');
-        $this->wgetDeb('Steam', 'steam.deb', 'https://media.steampowered.com/client/installer/steam.deb', [
+        $this->appImage('Cryptomator', "https://github.com/cryptomator/cryptomator/releases/download/1.5.15/cryptomator-1.5.15-x86_64.AppImage");
+        $this->wgetDeb('Vagrant', 'https://releases.hashicorp.com/vagrant/2.2.9/vagrant_2.2.9_x86_64.deb');
+        $this->wgetDeb('Angry IP Scanner', 'https://github.com/angryip/ipscan/releases/download/3.7.6/ipscan_3.7.6_amd64.deb');
+        $this->wgetDeb('Insomnia REST Client', 'https://updates.insomnia.rest/downloads/ubuntu/latest?&app=com.insomnia.app&source=website');
+        $this->wgetDeb('Google Chrome', 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb');
+        $this->wgetDeb('GitKraken', 'https://release.gitkraken.com/linux/gitkraken-amd64.deb');
+        $this->wgetDeb('SmartGit', 'https://www.syntevo.com/downloads/smartgit/smartgit-20_2_5.deb');
+        $this->wgetDeb('4k Video Downloader', 'https://dl.4kdownload.com/app/4kvideodownloader_4.16.0-1_amd64.deb');
+        $this->wgetDeb('Tixati', 'https://download2.tixati.com/download/tixati_2.83-1_amd64.deb');
+        $this->wgetDeb('Trillian', 'https://www.trillian.im/get/linux/6.3/?deb=64');
+        $this->wgetDeb('1Password', 'https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb');
+        $this->wgetDeb('PeaZip', 'https://github.com/peazip/PeaZip/releases/download/7.9.0/peazip_7.9.0.LINUX.x86_64.GTK2.deb');
+        $this->wgetDeb('Bitwarden', 'https://github.com/bitwarden/desktop/releases/download/v1.26.4/Bitwarden-1.26.4-amd64.deb');
+        $this->wgetDeb('VeraCrypt', 'https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Debian-10-amd64.deb');
+        $this->wgetDeb('MEGA', 'https://mega.nz/linux/MEGAsync/Debian_10.0/amd64/megasync_4.4.0-1.1_amd64.deb');
+        $this->wgetDeb('Pencil Project', 'https://pencil.evolus.vn/dl/V3.1.0.ga/pencil_3.1.0.ga_amd64.deb');
+        $this->wgetDeb('WPS Office', 'https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/10161/wps-office_11.1.0.10161.XA_amd64.deb');
+        $this->wgetDeb('Mattermost', 'https://releases.mattermost.com/desktop/4.6.2/mattermost-desktop-4.6.2-linux-amd64.deb');
+        $this->wgetDeb('ManicTime', 'https://cdn.manictime.com/setup/linux/v1_3_5_0/ManicTime.deb');
+        $this->makeInstallationSame('WPS Office', 'WPS Writer');
+        $this->wgetDeb('Steam', 'https://media.steampowered.com/client/installer/steam.deb', [
             "sudo dpkg --add-architecture i386",
             'sudo apt update',
             "sudo apt install libgl1-mesa-glx:i386 -y",
@@ -273,6 +325,8 @@ class PardusAppSeeder extends Seeder
         $this->snap('Eclipse', 'eclipse');
         $this->snap('scrcpy', 'scrcpy');
         $this->snap('Simplenote', 'simplenote');
+        $this->snap('Standard Notes', 'standard-notes');
+        $this->snap('ONLYOFFICE', 'onlyoffice-desktopeditors');
 
 //        [ "C++", "C (programming language)", "C#","PHP", "Go (Programming Language)",  ]
     }
